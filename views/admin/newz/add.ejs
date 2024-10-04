@@ -1,0 +1,23 @@
+
+    <%- include('../../partials/top-menu') %>
+  <section class="wrapper">
+    <div class="form signup">
+        <header>ADD NEWS</header>
+        <form action="/admin/newz/add" method="post" enctype="multipart/form-data">
+            <div class="mb-0">
+                <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
+            </div>
+            <div class="mb-0">
+                <input type="text" class="form-control" id="detail" name="detail" placeholder="Details" required>
+            </div>
+            <div class="mb-0">
+                <label for="photo" class="form-label">Upload Image</label>
+                <input type="file" class="form-control" id="photo" name="photo" required accept="image/*">
+            </div>
+            <button class="btn btn-info" type="submit">Add News</button>
+        </form>
+        
+      </div>
+  </div>
+</section>
+

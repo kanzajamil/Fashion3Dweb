@@ -1,0 +1,41 @@
+
+
+    
+    <header id="at-header" class="at-header at-haslayout">
+        <div class="at-navigationarea">
+            <div class="container">
+                <div class="row">
+                    <div class="at-navigationcontent">
+                        <strong class="at-logo"><a href="index.ejs"><img src="Assets/images/logo.svg" alt="Wayn Colin Logo"></a></strong>
+                        <nav class="navbar at-navbar navbar-expand-lg">
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#at-navigation" aria-controls="at-navigation" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse at-navigation" id="at-navigation">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li><a href="/">Home</a></li>
+                                    <li><a href="/image-to-3d">Image to 3D Models</a></li>
+                
+                                    <li><a href="/try-now">Try Now</a></li>
+                                </ul>
+                                <ul class="at-addnavloginsignup at-navaddlogosignup">
+                                    <li><a class="at-btn at-btnlogin" href="login">Login</a></li>
+                                    <li><a class="at-btn at-btngradiant at-btnsignup" href="signup">Signup</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <ul class="at-addnavloginsignup">
+                            <li><a class="at-btn at-btnlogin" href="login">Login</a></li>
+                            <li><a class="at-btn at-btngradiant at-btnsignup" href="signup">Signup</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+<div class="flashing">
+    <% if (flash) { %>
+        <div class="alert alert-<%-flash.type%>"><%- flash.message %></div>
+    <% } %>
+</div>

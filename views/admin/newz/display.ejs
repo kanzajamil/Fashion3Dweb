@@ -1,0 +1,103 @@
+
+    <%- include('../../admin') %>
+    <div class="start-container">
+        <img src="/Assets/img/newspaper.jpg"/>
+        <div class="overlaypicture"></div>
+        <div class="starttext-container">
+            <p class="start-text">NEWS & UPDATES</p>
+        </div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60" preserveAspectRatio="none" class="section-divider">
+        <path fill="white" d="
+            M0 0
+            H100
+            V80
+            H0
+            Z
+            M0 1
+            Q20 40 50 40
+            Q80 40 100 1
+            V0 H0 Z"
+        />
+    </svg>
+<div class="buttonapi">
+    <a class="btn btn-info" href="/admin/newz/add" >Add News</a>
+</div>
+    
+    <div class="api-container">
+
+        <% newsItems.forEach(newsItem => { %>
+            <div class="image-block">
+                <img src="<%= newsItem.imageUrl %>" alt="<%= newsItem.title %>">
+                <div class="text-block">
+                <h3><%= newsItem.title %></h3>
+                <p><%= newsItem.detail %></p>
+
+                <a href="/admin/newz/edit/<%= newsItem._id %>" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/admin/newz/delete/<%= newsItem._id %>" class="btn btn-danger btn-sm">Delete</a>
+                <!-- Add other fields as needed -->
+            </div>
+        </div>
+    <% }); %>
+</div>
+<div class="pageclass">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="/admin/newz/display/<%= page - 1 %>">Previous</a>
+            </li>
+            <% for (let index = 1; index <= totalPages; index++) { %>
+                <li class="page-item <% if (index === page) { %>active<% } %>">
+                    <a class="page-link" href="/admin/newz/display/<%= index %>"><%= index %></a>
+                </li>
+            <% } %>
+            <li class="page-item">
+                <a class="page-link" href="/admin/newz/display/<%= page + 1 %>">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60" preserveAspectRatio="none" class="section-divider3">
+    <path fill="#0B1C48" d="
+        M0 0
+        H100
+        V80
+        H0
+        Z
+        M0 1
+        Q20 40 50 40
+        Q80 40 100 1
+        V0 H0 Z"
+    />
+</svg>
+<footer class="footer-01">
+    <div class="containerlast">
+        <div class="row">
+            <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+                <h2 class="footer-heading with-line">Vision Logistics</h2>
+                <p>Your trusted partner for seamless international freight solutions, dedicated to ensuring your cargo reaches its destination safely, on time, every time, with exceptional service and reliability.</p>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+                <h2 class="footer-heading with-line">Quick Links</h2>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="py-2 d-block">Home</a></li>
+                    <li><a href="#" class="py-2 d-block">About</a></li>
+                    <li><a href="#" class="py-2 d-block">Services</a></li>
+                    <li><a href="#" class="py-2 d-block">News & Updates</a></li>
+                    <li><a href="#" class="py-2 d-block">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+                <h2 class="footer-heading3 with-line">Have a Question?</h2>
+                <div class="block-23">
+                    <ul class="custom-list">
+                        <li><i class="fa fa-map-marker" style="font-size:20px; color:white; margin-right: 20px;"></i></span><span class="text">Suite # 14, 2nd Floor, Central Plaza, 3 Civic Centre, New Garden Town, Lahore, Pakistan</span></li>
+                        <li><i class="fa fa-phone" style="font-size:20px; color:white; margin-right: 20px;"></i><span class="text">+92 42 35851475 & 76 </span></li>
+                        <li><i class="fa fa-envelope" style="font-size:20px; color:white; margin-right: 20px;"></i></span><span class="text">info@visionlogistics.net</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div> 
+    </div>
+</footer>

@@ -1,0 +1,23 @@
+
+    <%- include('../../partials/top-menu') %>
+  <section class="wrapper">
+    <div class="form signup">
+        <header>EDIT NEWS</header>
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="mb-0">
+                <input type="text" class="form-control" id="title" name="title"  value="<%= news.title%>" >
+            </div>
+            <div class="mb-0">
+                <input type="text" class="form-control" id="detail" name="detail" value="<%= news.detail%>">
+            </div>
+            <div class="mb-0">
+                <input type="file" name="newImage">
+            </div>
+            <button class="btn btn-info" type="submit">Save Changes</button>
+        </form>
+        
+      </div>
+  </div>
+</section>
+
+
