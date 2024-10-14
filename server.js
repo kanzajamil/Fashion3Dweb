@@ -49,6 +49,8 @@ app.use('/auth', authRoutes);
 const integRoutes = require("./routes/integrationRoute");
 app.use(integRoutes);
 
+const modelRoutes = require("./routes/modelRoutes.js");
+app.use(modelRoutes);
 
 app.get("/", function (req, res) {
   res.render("index");
@@ -59,7 +61,7 @@ app.get("/admin", function (req, res) {
 });
 
 
-app.get("/user-dash", function (req, res) {
+app.get("/user-dash",ensureAuthenticated, function (req, res) {
   res.render("user-dash");
 });
 

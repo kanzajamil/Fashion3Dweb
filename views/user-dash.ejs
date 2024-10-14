@@ -1,8 +1,33 @@
 <%- include('./partials/top-menu') %>
-    
-    <h1>USER DASHBOARD</h1>
+
+<h1>Welcome to Your Dashboard, <%= user.name %>!</h1>
+<% if (models.length > 0) { %>
+    <div class="models-container">
+        <% models.forEach(function(model) { %>
+            <div class="model-card">
+                <!-- Model Title -->
+                
+
+                <% model.filePaths.forEach(function(filePath) { %>
+                    <% if (filePath.type === 'combined') { %>
+                        <!-- 3D Model Renderer -->
+                        <div id="modelView-<%= model._id %>" class="model-view" style="width: 40vh; height: 40vh; background-color: black;" ></div>
+                        <script>
+                            render3DModel('<%= filePath.path %>','modelView-<%= model._id %>');
+                        </script>
+                    <% } %>
+                <% }) %>
+                <h4> Title: <%= model.title %></h4>
+                
+                <!-- Delete Button 
+                <form action="/user-dash/<%= model._id %>?_method=DELETE" method="POST">
+                    <button type="submit">Delete</button>
+                </form> -->
+            </div>
+        <% }) %>
+    </div>
+<% } else { %>
+    <p>No models found. You haven't uploaded any models yet.</p>
+<% } %>
 
 <%- include('./partials/footer') %>
-
-    
-        
