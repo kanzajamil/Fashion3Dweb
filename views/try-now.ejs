@@ -19,7 +19,7 @@
         <div class="container">
             <div class="row">
                 <div class="at-uploadarea">
-                    <form class="at-formtheme at-uploadform" action="/upload" method="POST" enctype="multipart/form-data">
+                    <form class="at-formtheme at-uploadform" id="faaltu" action="/upload" method="POST" enctype="multipart/form-data">
                         <fieldset>
                             <div class="form-group">
                                 <label>Title</label>
@@ -52,6 +52,25 @@
                     <div id="modelViewer"></div>
                     <model-viewer src="/3Dmodels/combined_model.glb" camera-controls auto-rotate></model-viewer>-->
                     <div id="modelView" style="width: 80vh; height: 80vh; background-color: black;"></div>
+                    
+                    <% if (modelPath) { %>
+                        <p>Model Path: <%= modelPath ? modelPath : 'No model path available' %></p>
+                        <script>
+                            console.log('Model path received:', '<%= modelPath %>');
+                            // Call the render3DModel function to display the model
+                            render3DModel('<%= modelPath %>', 'modelView');
+                            console.log(resetting);
+                            document.getElementById('faaltu').reset();
+                            console.log(restted);
+                            modelPath=null;
+                            console.log(modelPath);
+                        </script>
+                    <% } else { %>
+                        <script>
+                            // Call the render3DModel function to display the model
+                            render3DModel('', 'modelView');
+                        </script>
+                    <% } %>
 
 
 

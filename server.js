@@ -14,9 +14,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({ secret: "Shh, its a secret!" ,resave: false,
 saveUninitialized: true}));
-app.use(require("./middlewares/common"));
 
 
+
+
+const common = require("./middlewares/common");
 const logger = require("./middlewares/logger");
 const sessionauth = require("./middlewares/sessionauth");
 const admin = require("./middlewares/admin");
@@ -24,6 +26,7 @@ const isLoggedin = require("./middlewares/authMiddleware");
 const ensureAuthenticated = require("./middlewares/authenticated");
 
 
+//app.use(sessionauth);
 app.get("/views", (req, res) => {
   let visits = req.cookies.visits;
 
@@ -37,10 +40,10 @@ app.get("/views", (req, res) => {
   useTempFiles : true,
 }));*/
 
-
+app.use(common);
 app.use("/", require("./routes/site/auth"));
 
-app.use("/admin", sessionauth, admin, require("./routes/admin/newz"));
+//app.use("/admin", sessionauth, admin, require("./routes/admin/newz"));
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
 
@@ -66,7 +69,8 @@ app.get("/user-dash",ensureAuthenticated, function (req, res) {
 });
 
 app.get("/try-now", function (req, res) {
-  res.render("try-now");
+  let modelPath = null;
+  res.render("try-now", {modelPath});
 });
 
 app.get("/image-to-3d", function (req, res) {

@@ -1,4 +1,4 @@
-const scene = new THREE.Scene();
+/*const scene = new THREE.Scene();
 
 
 const modelViewDiv = document.getElementById('modelView');
@@ -79,4 +79,4 @@ window.addEventListener('resize', function () {
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
-});
+});*/

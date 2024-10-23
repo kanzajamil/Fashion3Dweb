@@ -2,10 +2,10 @@
   let User = require("../models/user");
   module.exports = async function (req, res, next) {
     //login a user indevelopment mode so that we dont need to relogin during server rebooting
-    let user = await User.findOne({ email: "kanza.jamil123@gmail.com" });
+    //let user = await User.findOne({ email: "kanza.jamil123@gmail.com" });
     // console.log("user");
     // console.log(user);
-    req.session.user = user;
+    //req.session.user = user;
     // end default login
     // comment above code in deployment
     if (!req.session.user) return res.redirect("/login");

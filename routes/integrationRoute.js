@@ -126,10 +126,11 @@ router.post('/upload', upload.single('file'), async (req, res) => {
         if (!user) {
             return res.status(401).send('User not logged in');
         }
-
+        let modelPath = null;
         // Find the user by ID and update their models array
         const foundUser = await User.findById(user._id);
         if (foundUser) {
+            modelPath= filePaths.find(fp => fp.type === 'combined').path;
             foundUser.models.push({
                 title: title, // Model title from the form
                 filePaths: filePaths // Save all file paths
@@ -139,9 +140,13 @@ router.post('/upload', upload.single('file'), async (req, res) => {
 
         // Clean up the zipped file
         fs.unlinkSync(zipFilePath);
-
+        
+        
         // Redirect to the view page after successful file save and user update
-        res.redirect('/try-now#at-main');
+        //res.redirect('/try-now#at-main');
+        res.render('try-now', {modelPath});
+        //res.redirect(`/try-now?modelPath=${encodeURIComponent(modelPath)}`);
+        //req.session.modelPath = null;
     } catch (error) {
         console.error('Error uploading image or saving .obj file:', error);
         res.status(500).send('Failed to upload image or save .obj file.');

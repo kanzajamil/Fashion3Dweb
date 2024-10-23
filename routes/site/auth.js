@@ -44,7 +44,8 @@ router.post("/signup", async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt);
   await user.save();
   //   return res.send(user);
-  return res.redirect("/user-dash");
+  req.session.flash = { type: "success", message: "Account Created. Now Login please." };
+  return res.redirect("/login");
 });
 
 module.exports = router;

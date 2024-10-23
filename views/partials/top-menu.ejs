@@ -18,16 +18,39 @@
                 
                                     <li><a href="/try-now">Try Now</a></li>
                                 </ul>
-                                <ul class="at-addnavloginsignup at-navaddlogosignup">
-                                    <li><a class="at-btn at-btnlogin" href="login">Login</a></li>
-                                    <li><a class="at-btn at-btngradiant at-btnsignup" href="signup">Signup</a></li>
-                                </ul>
                             </div>
                         </nav>
-                        <ul class="at-addnavloginsignup">
-                            <li><a class="at-btn at-btnlogin" href="login">Login</a></li>
-                            <li><a class="at-btn at-btngradiant at-btnsignup" href="signup">Signup</a></li>
-                        </ul>
+                        <% if (!user) { %>
+                            <ul class="at-addnavloginsignup">
+                                <li><a class="at-btn at-btnlogin" href="login">Login</a></li>
+                                <li><a class="at-btn at-btngradiant at-btnsignup" href="signup">Signup</a></li>
+                            </ul>
+                        <% } else { %>
+                            <ul class="at-addnavloginsignup">
+                                <li><a class="at-btn at-btnlogin" href="user-dash">Dashboard</a></li>
+                                <li><a class="at-btn at-btngradiant at-btnsignup" href="/logout">Logout</a></li>
+                            </ul>
+                               <!-- <li class="at-addnavloginsignup">
+                                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <%= user.name %>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                        <li>
+                                    </ul>
+                                </li>
+                                 Example single danger button 
+                                 <div class="btn-group">
+                                    <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <%= user.name %>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="/user-dash">Dashboard</a></li>
+                                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                                    </ul>
+                                </div>  -->
+                            
+                        <% } %>
+                        
                     </div>
                 </div>
             </div>
