@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="row">
                     <div class="at-navigationcontent">
-                        <strong class="at-logo"><a href="index.ejs"><img src="Assets/images/logo.svg" alt="Wayn Colin Logo"></a></strong>
+                        <strong class="at-logo"><a href="index.ejs"><img src="/Assets/images/logo.svg" alt="Wayn Colin Logo"></a></strong>
                         <nav class="navbar at-navbar navbar-expand-lg">
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#at-navigation" aria-controls="at-navigation" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
@@ -15,8 +15,10 @@
                                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                     <li><a href="/">Home</a></li>
                                     <li><a href="/image-to-3d">Image to 3D Models</a></li>
-                
                                     <li><a href="/try-now">Try Now</a></li>
+                                    <% if (!user) { %>
+                                    <li><a href="/help">Help</a></li>
+                                    <% } %>
                                 </ul>
                             </div>
                         </nav>
@@ -25,9 +27,65 @@
                                 <li><a class="at-btn at-btnlogin" href="login">Login</a></li>
                                 <li><a class="at-btn at-btngradiant at-btnsignup" href="signup">Signup</a></li>
                             </ul>
+
                         <% } else { %>
+
+                            <div class="user-avatar" data-bs-toggle="modal" data-bs-target="#userModal">
+                                <img src="https://via.placeholder.com/150" alt="User Avatar" id="avatar-img">
+                                <span class="user-initials"><%= user.name.charAt(0).toUpperCase() %></span>
+                            </div>
+                            <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="userModalLabel"><%= user.name %></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <hr class="custom-hr">
+                                        <div class="modal-body">
+                                            <ul class="list-unstyled">
+                                                <li>
+                                                    <a href="/user-dash" class="modal-link">
+                                                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="flex-none" stroke="1.5"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.622 1.602a.75.75 0 0 1 .756 0l9 5.25a.75.75 0 0 1 .372.648v9a.75.75 0 0 1-.372.648l-9 5.25a.75.75 0 0 1-.756 0l-9-5.25a.75.75 0 0 1-.372-.648v-9a.75.75 0 0 1 .372-.648l9-5.25ZM3.75 8.806v7.263l7.5 4.375v-7.263l-7.5-4.375Zm9 4.375v7.263l7.5-4.375V8.806l-7.5 4.375ZM19.512 7.5 12 11.882 4.488 7.5 12 3.118 19.512 7.5Z" fill="currentColor"></path></svg>
+                                                        My Assets
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/settings" class="modal-link">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-settings size-5"><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path></svg>
+                                                        Settings
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/help" class="modal-link">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-help"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M12 17l0 .01"></path><path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4"></path></svg>
+                                                        Help
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            
+                                        </div>
+                                        <hr class="custom-hr">
+                                            <div class="d-flex justify-content-between align-items-center p-3">
+                                                <span class="terms-of-service">Terms of Service</span>
+                                                <a href="/logout" class="text-decoration-none">
+                                                <button class="btn btn-secondary d-flex align-items-center" >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-logout "><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path><path d="M9 12h12l-3 -3"></path><path d="M18 15l3 -3"></path></svg>
+                                                    Logout
+                                                </button>
+                                                </a>
+                                            </div>
+                                        
+                                        
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <!--
                             <ul class="at-addnavloginsignup">
-                                <li><a class="at-btn at-btnlogin" href="user-dash">Dashboard</a></li>
+                                
+                                <li><a class="at-btn at-btnlogin" href="/user-dash">Dashboard</a></li>
                                 <li><a class="at-btn at-btngradiant at-btnsignup" href="/logout">Logout</a></li>
                             </ul>
                                <!-- <li class="at-addnavloginsignup">
@@ -57,8 +115,13 @@
         </div>
     </header>
 
-<div class="flashing">
-    <% if (flash) { %>
-        <div class="alert alert-<%-flash.type%>"><%- flash.message %></div>
-    <% } %>
-</div>
+    <div class="flashing">
+        <% if (flash) { %>
+            <div id="flashMessage" class="alert alert-<%- flash.type %>">
+                <%- flash.message %>
+            </div>
+        <% } %>
+    </div>
+
+
+    

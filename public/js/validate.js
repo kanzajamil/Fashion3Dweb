@@ -1,4 +1,4 @@
-$(document).ready(function() {
+/*$(document).ready(function() {
     $("#commentForm").validate({
       rules: {
        
@@ -70,4 +70,4 @@ $(document).ready(function() {
       },
     });
   });
-  
+  */

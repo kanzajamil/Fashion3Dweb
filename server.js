@@ -55,16 +55,34 @@ app.use(integRoutes);
 const modelRoutes = require("./routes/modelRoutes.js");
 app.use(modelRoutes);
 
+const editRoutes = require("./routes/modelEditroutes.js");
+app.use(editRoutes);
+
+const editProfileRoutes = require("./routes/editProfile.js");
+app.use(editProfileRoutes);
+
+const delAccRoutes = require("./routes/deleteAccountRoute.js");
+app.use(delAccRoutes);
+
+const helpRoutes = require("./routes/help.js");
+app.use(helpRoutes);
+
+const animRoutes = require("./routes/animationRoutes.js");
+app.use(animRoutes);
+
 app.get("/", function (req, res) {
   res.render("index");
 });
 
-app.get("/admin", function (req, res) {
-  res.render("admin");
+app.get("/help", helpRoutes, function (req, res) {
+  res.render("help");
+});
+app.get("/model-edit", function (req, res) {
+  res.render("model-edit");
 });
 
 
-app.get("/user-dash",ensureAuthenticated, function (req, res) {
+app.get("/user-dash", ensureAuthenticated, function (req, res) {
   res.render("user-dash");
 });
 
@@ -76,15 +94,34 @@ app.get("/try-now", function (req, res) {
 app.get("/image-to-3d", function (req, res) {
   res.render("image-to-3d");
 });
+app.get("/modeledit/:modelId", function (req, res) {
+  res.render("modeledit",{ scrollTo: 'at-main' });
+});
+
+app.get("/animate/:modelId", function (req, res) {
+  let animatedModelPath = null;
+  res.render("animate", {animatedModelPath});
+});
 
 
-app.get("/news", function (req, res) {
-  res.render("news");
+app.get("/settings", function (req, res) {
+  res.render("settings");
 });
 
 app.get("/login", function (req, res) {
     res.render("login");
   });
+// Route to render the Forgot Password page
+app.get("/forgot-password", (req, res) => {
+  res.render("forgot-password");  // forgot-password.ejs
+});
+
+// Route to render the Reset Password page
+app.get("/reset-password/:token", (req, res) => {
+  const { token } = req.params;
+  res.render("reset-password", { token });  // reset-password.ejs
+});
+
 
 app.get("/signup", function (req, res) {
   res.render("signup");

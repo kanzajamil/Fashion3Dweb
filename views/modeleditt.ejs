@@ -1,0 +1,86 @@
+<%- include('./partials/top-menu') %>
+
+<div style=" width:auto; height: auto; ">
+<div class="viewer-container" >
+    <div id="modelViewDi" style="padding: 4px; width: 1000px; height: 800px; background-color: black; ">
+    </div>
+    
+  <!-- Toolbar with buttons on the right side -->
+  <div class="toolbar">
+    <button  value="body" onclick="switchModelPart('body')">Body</button>
+    <button  value="upper" onclick="switchModelPart('upper')">Top</button>
+    <button  value="lower" onclick="switchModelPart('lower')">Bottom</button>
+  </div>
+  <!-- Bottom panel with thumbnail previews -->
+ 
+  
+</div>
+<div class="bottom-panel">
+            
+    <div class="color-picker-container" style="padding:10px;" >
+        
+        <input class="jscolor color-picker" id="colorPicker" name="color" value="ff0000">
+        
+    </div>
+
+
+    <div class="button-container" style="flex: 1;">
+        <div class="file-input-container" style="display: inline-block; position: relative;">
+            <input type="file" id="inputGroupFile01" name="file" style="opacity: 0; position: absolute; left: 0; top: 0; cursor: pointer; width:30px">
+            <label class="at-btn at-btngradiant at-btnsignup" for="inputGroupFile01">Add texture</label>
+        </div>
+    </div>
+    <div class="dropdown-container">
+        <button type="button" class="at-btn at-btngradiant at-btnsignup" onclick="toggleMenu()">Download</button>
+        <div id="formatSelect" class="dropdown-menu">
+            <button onclick="saveOBJWithMTLLocally(summodel, textureimage)">Download as .obj</button>
+            <button onclick="exportToSTL(summodel)">Download as .stl</button>
+            <button onclick="exportToGLB(summodel)">Download as .glb</button>
+        </div>
+    </div>
+</div>
+
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      init2('<%= mergedModelPath %>');
+      
+   });
+</script>
+<script>
+    function switchModelPart(part) {
+       const upperModelPath = 'hjc'; // Get the upper model path
+       const lowerModelPath ='hsajc'; // Get the lower model path
+       const bodyModelPath ='shvfja'; 
+       if (part === 'upper') {
+           console.log("Switching to upper model:", upperModelPath);
+           initializeFileInput(topModel); // Initialize with upper model path
+       } else if (part === 'lower') {
+           console.log("Switching to bottom model:", lowerModelPath);
+           initializeFileInput(bottomModel); // Initialize with lower model path
+       }
+       else if (part === 'body') {
+           console.log("Switching to smpl body model:", bodyModelPath);
+           initializeFileInput(bodyModel); // Initialize with lower model path
+       }
+   }
+</script>
+
+<script>
+    
+    const colorPicker = document.getElementById("colorPicker");
+        const objPath = '<%= mergedModelPath %>';
+
+        colorPicker.addEventListener("input", () => {
+            const colorHex = `${colorPicker.value}`;
+
+            applyColorTexture(objPath, colorHex); // Apply selected color to the object
+        });
+  </script>
+
+
+
+
+
+
+    

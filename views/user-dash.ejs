@@ -1,33 +1,101 @@
 <%- include('./partials/top-menu') %>
-
-<h1>Welcome to Your Dashboard, <%= user.name %>!</h1>
-<% if (models.length > 0) { %>
-    <div class="models-container">
-        <% models.forEach(function(model) { %>
-            <div class="model-card">
-                <!-- Model Title -->
-                
-
-                <% model.filePaths.forEach(function(filePath) { %>
-                    <% if (filePath.type === 'combined') { %>
-                        <!-- 3D Model Renderer -->
-                        <div id="modelView-<%= model._id %>" class="model-view" style="width: 40vh; height: 40vh; background-color: black;" ></div>
-                        <script>
-                            render3DModel('<%= filePath.path %>','modelView-<%= model._id %>');
-                        </script>
-                    <% } %>
-                <% }) %>
-                <h4> Title: <%= model.title %></h4>
-                
-                <!-- Delete Button 
-                <form action="/user-dash/<%= model._id %>?_method=DELETE" method="POST">
-                    <button type="submit">Delete</button>
-                </form> -->
-            </div>
-        <% }) %>
+<div class="at-hombannerr at-haslayout">
+    <div class="at-bannercontentholderr mb-0">
+        <h2>My Assets </h2>
+        <p>View and manage all the 3D models you've generated so far.</p>
     </div>
-<% } else { %>
-    <p>No models found. You haven't uploaded any models yet.</p>
-<% } %>
+</div>
 
+
+<main id="at-main" class="at-main at-haslayout">
+    <div class="at-haslayout at-sectionspace at-topspacezero">
+        <div class="container">
+            <div class="row">
+                
+                <% if (models.length > 0) { %>
+                    <div class="models-container">
+                        <% models.forEach(function(model) { %>
+                            <div class="model-card">
+                                <!-- Model Title -->
+                                
+                                <% model.filePaths.forEach(function(filePath) { %>
+                                    <% if (filePath.type === 'combined') { %>
+                                        <!-- 3D Model Renderer -->
+                                        <div id="modelView-<%= model._id %>" class="model-view" style="width: 50vh; height: 50vh; background-color: black; border-radius:10px; overflow: hidden;" ></div>
+                                        <script>
+                                            render3DModel('<%= filePath.path %>','modelView-<%= model._id %>');
+                                        </script>
+                                    <% } %>
+                                <% }) %>
+                                <div class="model-card-info">
+                                    <div class="model-card-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="flex-none" stroke="1.5"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.622 1.602a.75.75 0 0 1 .756 0l9 5.25a.75.75 0 0 1 .372.648v9a.75.75 0 0 1-.372.648l-9 5.25a.75.75 0 0 1-.756 0l-9-5.25a.75.75 0 0 1-.372-.648v-9a.75.75 0 0 1 .372-.648l9-5.25ZM3.75 8.806v7.263l7.5 4.375v-7.263l-7.5-4.375Zm9 4.375v7.263l7.5-4.375V8.806l-7.5 4.375ZM19.512 7.5 12 11.882 4.488 7.5 12 3.118 19.512 7.5Z" fill="currentColor"></path></svg>
+                                    </div>
+                                    <div class="model-inner-info">
+                                        <h5><%= model.title %></h5>
+                                        <p>Created at <%= new Date(model.date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) %></p>
+                                    </div>
+                                    <div class="three-dot-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="custom-dropdown-toggle" onclick="toggleDropdown('<%= model._id %>')"><path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path><path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path></svg>
+                                        <div class="custom-dropdown-menu" id="dropdown-<%= model._id %>">
+                                            <a href="/modeledit/<%= model._id %>" class="custom-dropdown-item-edit">
+                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+                                                  </svg>
+                                                  
+                                                Edit
+                                            </a>
+                                            
+                                            <a href="/user-dash/delete/<%= model._id %>" class="custom-dropdown-item-del" onclick="return confirm('Are you sure you want to delete this model?');">
+                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                                                  </svg>                                                  
+                                                Delete
+                                            </a>
+                                            <script>
+                                                function toggleDropdown(modelId) {
+                                                    const dropdown = document.getElementById(`dropdown-${modelId}`);
+                                                    if (dropdown.style.display === 'none' || !dropdown.style.display) {
+                                                        // Hide all other dropdowns
+                                                        document.querySelectorAll('.custom-dropdown-menu').forEach(menu => menu.style.display = 'none');
+                                                        
+                                                        // Show the current dropdown
+                                                        dropdown.style.display = 'block';
+                                                    } else {
+                                                        dropdown.style.display = 'none';
+                                                    }
+                                                }
+
+                                                // Close dropdown when clicking outside
+                                                window.addEventListener('click', function (event) {
+                                                    if (!event.target.closest('.three-dot-icon')) {
+                                                        document.querySelectorAll('.custom-dropdown-menu').forEach(menu => menu.style.display = 'none');
+                                                    }
+                                                });
+                                            </script>
+                                        </div>
+                                        <!--
+                                        <a href="/modeledit/<%= model._id %>" class="btn btn-info">
+                                            Edit
+                                        </a>
+                                        <a href="/user-dash/delete/<%= model._id %>" 
+                                            class="btn btn-danger" 
+                                            onclick="return confirm('Are you sure you want to delete this model?');">
+                                            Delete
+                                        </a>
+                                        -->
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                <% } else { %>
+                    <p>No models found. You haven't uploaded any models yet.</p>
+                <% } %>
+            
+           
+            </div>
+        </div>
+    </div>
+</main>
 <%- include('./partials/footer') %>

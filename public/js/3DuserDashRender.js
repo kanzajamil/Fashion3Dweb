@@ -22,6 +22,7 @@ window.render3DModel = function(modelPath, divId) {
     // Add lights to the scene
     const ambientLight = new THREE.AmbientLight(0x404040, 0.5);  // Lower intensity
     scene.add(ambientLight);
+    scene.background = new THREE.Color('#1e1e1e');
 
     // Add directional lights with controlled intensity
     const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.7);
@@ -33,29 +34,42 @@ window.render3DModel = function(modelPath, divId) {
     scene.add(directionalLight2);
 
     // Load the OBJ model without MTL
+    // Load the OBJ model without MTL
     const objLoader = new THREE.OBJLoader();
     objLoader.load(modelPath, function (object) {
-        // Center the model
-        const box = new THREE.Box3().setFromObject(object);
-        const center = box.getCenter(new THREE.Vector3());
-        object.position.sub(center);  // Center the model
+    // Center the model
+    const box = new THREE.Box3().setFromObject(object);
+    const center = box.getCenter(new THREE.Vector3());
+    object.position.sub(center);  // Center the model
 
-        // Change the material for better lighting response
-        object.traverse(function (child) {
-            if (child.isMesh) {
-                child.material = new THREE.MeshStandardMaterial({
-                    color: 0xffffff,  // Default color; change as needed
-                    roughness: 0,  // Adjust to control surface roughness
-                    metalness: 0,  // Adjust for a more realistic look
-                    side: THREE.DoubleSide  // Render both sides
-                });
-            }
-        });
+    // Move the model up so that it stands on the grid
+    const height = box.max.y - box.min.y; // Get the height of the model
+    object.position.y += height / 2; // Adjust Y position to sit on the grid
 
-        scene.add(object);
-    }, undefined, function (error) {
-        console.error('An error occurred while loading the OBJ model:', error);
+    // Change the material for better lighting response
+    object.traverse(function (child) {
+        if (child.isMesh) {
+            child.material = new THREE.MeshStandardMaterial({
+                color: 0xffffff,  // Default color; change as needed
+                roughness: 0,  // Adjust to control surface roughness
+                metalness: 0,  // Adjust for a more realistic look
+                side: THREE.DoubleSide  // Render both sides
+            });
+        }
     });
+
+    scene.add(object);
+
+    // Adjust camera position based on the bounding box size
+    const modelHeight = box.max.y - box.min.y;
+    const modelWidth = box.max.x - box.min.x;
+    camera.position.set(0, modelHeight / 2, modelHeight); // Position the camera higher based on model height
+    controls.target.set(0, modelHeight / 2, 0); // Set the target to the center of the model
+    
+    }, undefined, function (error) {
+    console.error('An error occurred while loading the OBJ model:', error);
+});
+
 
     // Camera positioning
     camera.position.z = 1.5;

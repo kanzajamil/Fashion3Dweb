@@ -23,38 +23,44 @@
                         <fieldset>
                             <div class="form-group">
                                 <label>Title</label>
-                                <input type="text" name="title" class="form-control" placeholder="Wolf">
+                                <input type="text" name="title" class="form-control" placeholder="Title">
                             </div>
                             <div class="input-group form-group at-uploadfiles mb-0">
-                                <label class="at-uploadfilelabel" for="inputGroupFile01">
+                                <label class="at-uploadfilelabel" for="inputGroupFile01" id="uploadLabel">
                                     <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect width="50" height="50" rx="25" fill="white"/>
                                         <path d="M20.1232 29.2621L20.1235 29.2618L23.8331 25.7986C23.8331 25.7986 23.8332 25.7985 23.8332 25.7985C24.1151 25.5354 24.4255 25.3 25 25.3C25.3036 25.3 25.5112 25.3537 25.6757 25.4326C25.8441 25.5135 25.9854 25.6292 26.1518 25.7845C26.1518 25.7845 26.1519 25.7846 26.1519 25.7846L29.8765 29.2618L29.8768 29.2621C30.1825 29.5466 30.325 29.8737 30.325 30.25C30.325 31.0852 29.5472 31.7 28.75 31.7C28.3393 31.7 27.9727 31.5641 27.6609 31.2732L27.0797 30.7307L26.575 30.2596V30.95V37.25C26.575 38.0312 25.8891 38.7 25 38.7C24.1109 38.7 23.425 38.0312 23.425 37.25V30.95V30.2596L22.9203 30.7307L22.3391 31.2732C22.0273 31.5641 21.6607 31.7 21.25 31.7C20.4527 31.7 19.675 31.086 19.675 30.25C19.675 29.8737 19.8175 29.5466 20.1232 29.2621ZM35.9065 18.9489L35.9226 19.1083L36.0641 19.1836C38.2415 20.3424 39.7 22.5165 39.7 25C39.7 28.6809 36.496 31.7 32.5 31.7H32.4793C32.6813 31.256 32.8 30.7682 32.8 30.25C32.8 29.7346 32.6869 29.2484 32.4804 28.8H32.5C34.714 28.8 36.55 27.1142 36.55 25C36.55 23.6296 35.7529 22.3665 34.4886 21.6945L32.9371 20.8686L32.7704 19.2176L32.7704 19.2176C32.4794 16.3405 29.9282 14.2 26.875 14.2C24.081 14.2 21.629 16.0524 21.0693 18.6383L20.4958 21.2867L17.4316 21.2001L17.4316 21.1998L17.4176 21.2001C15.241 21.2403 13.45 22.912 13.45 25C13.45 27.1142 15.286 28.8 17.5 28.8H17.5201C17.3132 29.2486 17.2 29.7344 17.2 30.25C17.2 30.7682 17.3187 31.256 17.5207 31.7H17.5C13.504 31.7 10.3 28.6809 10.3 25C10.3 21.3191 13.504 18.3 17.5 18.3C17.5211 18.3 17.5441 18.3012 17.5747 18.3031C17.5786 18.3034 17.5827 18.3036 17.587 18.3039C17.6132 18.3056 17.6458 18.3077 17.6781 18.3086L17.9271 18.3157L17.9798 18.0722C18.8129 14.2229 22.4668 11.3 26.875 11.3C31.6131 11.3 35.4744 14.6745 35.9065 18.9489Z" fill="#121212" stroke="white" stroke-width="0.6"/>
                                     </svg>
                                     <span>Upload your file</span>
+                                    
                                 </label>
-                                <input type="file" class="form-control" id="inputGroupFile01" name="file">
+                                <div class="at-uploadfilelabel" id="imagePreviewContainer" style="display:none;">
+                                    <img id="imagePreview" src="" alt="Image Preview"/>
+                                </div>
+
+                                <input type="file" class="form-control" id="inputGroupFile01" name="file" onchange="previewImage(event)">
                             </div>
+                            
+                            <!-- Image preview container -->
+                            
+                            
                         </fieldset>
-                        <button type="submit" class="btn btn-primary">Upload</button>
+                        <button type="submit" class="at-btn at-btnupload" id="just">Generate</button>
                     </form>
-                    
-                    <!--
-                    <path d="M20.1232 29.2621L20.1235 29.2618L23.8331 25.7986C23.8331 25.7986 23.8332 25.7985 23.8332 25.7985C24.1151 25.5354 24.4255 25.3 25 25.3C25.3036 25.3 25.5112 25.3537 25.6757 25.4326C25.8441 25.5135 25.9854 25.6292 26.1518 25.7845C26.1518 25.7845 26.1519 25.7846 26.1519 25.7846L29.8765 29.2618L29.8768 29.2621C30.1825 29.5466 30.325 29.8737 30.325 30.25C30.325 31.0852 29.5472 31.7 28.75 31.7C28.3393 31.7 27.9727 31.5641 27.6609 31.2732L27.0797 30.7307L26.575 30.2596V30.95V37.25C26.575 38.0312 25.8891 38.7 25 38.7C24.1109 38.7 23.425 38.0312 23.425 37.25V30.95V30.2596L22.9203 30.7307L22.3391 31.2732C22.0273 31.5641 21.6607 31.7 21.25 31.7C20.4527 31.7 19.675 31.086 19.675 30.25C19.675 29.8737 19.8175 29.5466 20.1232 29.2621ZM35.9065 18.9489L35.9226 19.1083L36.0641 19.1836C38.2415 20.3424 39.7 22.5165 39.7 25C39.7 28.6809 36.496 31.7 32.5 31.7H32.4793C32.6813 31.256 32.8 30.7682 32.8 30.25C32.8 29.7346 32.6869 29.2484 32.4804 28.8H32.5C34.714 28.8 36.55 27.1142 36.55 25C36.55 23.6296 35.7529 22.3665 34.4886 21.6945L32.9371 20.8686L32.7704 19.2176L32.7704 19.2176C32.4794 16.3405 29.9282 14.2 26.875 14.2C24.081 14.2 21.629 16.0524 21.0693 18.6383L20.4958 21.2867L17.4316 21.2001L17.4316 21.1998L17.4176 21.2001C15.241 21.2403 13.45 22.912 13.45 25C13.45 27.1142 15.286 28.8 17.5 28.8H17.5201C17.3132 29.2486 17.2 29.7344 17.2 30.25C17.2 30.7682 17.3187 31.256 17.5207 31.7H17.5C13.504 31.7 10.3 28.6809 10.3 25C10.3 21.3191 13.504 18.3 17.5 18.3C17.5211 18.3 17.5441 18.3012 17.5747 18.3031C17.5786 18.3034 17.5827 18.3036 17.587 18.3039C17.6132 18.3056 17.6458 18.3077 17.6781 18.3086L17.9271 18.3157L17.9798 18.0722C18.8129 14.2229 22.4668 11.3 26.875 11.3C31.6131 11.3 35.4744 14.6745 35.9065 18.9489Z" fill="#121212" stroke="white" stroke-width="0.6"/>
-                    <div class="at-downloadimgarea">
-                        <figure class="at-threedimg">
-                            <img src="images/3d-img.jpg" alt="threed-img" style="width: 7000px;">
-                        </figure>
-                        <div class="at-btndownloadarea">
-                            <button type="button" class="at-btn at-btngradiant at-btndownload">Submit</button>
+                    <div>
+                        <div id="loadingMessage" style="display: none;">
+                            <div class="loading-content">Model is being Generated. Please wait for a few seconds...</div>
                         </div>
-                    </div>
-                    <div id="modelViewer"></div>
-                    <model-viewer src="/3Dmodels/combined_model.glb" camera-controls auto-rotate></model-viewer>-->
-                    <div id="modelView" style="width: 80vh; height: 80vh; background-color: black;"></div>
+                        
+                    <div id="modelView"></div>
+                    
                     
                     <% if (modelPath) { %>
+                        <ul class="at-addnavloginsignup">
+                            <li><a class="at-btn at-btngradiant at-btnEdit" href="/modeledit/<%= latestModelId %>">EDIT</a></li>
+                        </ul>
                         <p>Model Path: <%= modelPath ? modelPath : 'No model path available' %></p>
+                        
                         <script>
                             console.log('Model path received:', '<%= modelPath %>');
                             // Call the render3DModel function to display the model
@@ -71,7 +77,7 @@
                             render3DModel('', 'modelView');
                         </script>
                     <% } %>
-
+                </div>
 
 
                     
@@ -80,6 +86,54 @@
             </div>
         </div>	
     </div>
+
+    <script>function previewImage(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+    
+        // When the image is loaded, display it and hide the SVG
+        reader.onload = function() {
+            const imagePreview = document.getElementById('imagePreview');
+            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+            const uploadLabel = document.getElementById('uploadLabel');
+    
+            // Set the image src to the file content
+            imagePreview.src = reader.result;
+    
+            // Display the image preview container
+            imagePreviewContainer.style.display = 'block';
+    
+            // Hide the upload SVG and label
+            uploadLabel.style.display = 'none';
+        };
+    
+        // Read the image file as Data URL
+        reader.readAsDataURL(file);
+    }
+    </script>
+    
+    <script>
+        // Get the form and elements
+        const uploadForm = document.getElementById('faaltu');
+        const loadingMessage = document.getElementById('loadingMessage');
+        const submitButton = document.getElementById('just');
+    
+        // Add an event listener to the form
+        uploadForm.addEventListener('submit', function (event) {
+            // Display the loading message
+            loadingMessage.style.display = 'flex';
+    
+            // Disable the submit button to prevent duplicate submissions
+            submitButton.disabled = true;
+    
+            // Allow the form to submit normally (do not use preventDefault here)
+        });
+    </script>
+
+
+    
+    
+    
     <!--************************************
             Upload File End
     *************************************-->

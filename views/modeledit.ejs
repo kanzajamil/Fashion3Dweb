@@ -1,0 +1,228 @@
+<%- include('./partials/top-menu') %>
+<main id="at-main" class="at-main at-haslayout">
+    <div class="at-haslayout at-topspacezero">
+        
+                <div class="at-modeleditarea">
+
+                    <div class="left-panel">
+                        <div class="textures-area">
+                            <h4>Textures</h4>
+                            <div class="textures">
+                            <div class="texture-selection">
+                                <img src="/Assets/images/texture1.jpeg" alt="Texture Preview" class="texture-img" onclick="" />
+                            </div>
+                            <div class="texture-selection">
+                                <img src="/Assets/images/texture2.jpeg" alt="Texture Preview" class="texture-img" onclick="" />
+                            </div>
+                            <div class="texture-selection">
+                                <img src="/Assets/images/texture4.jpeg" alt="Texture Preview" class="texture-img" onclick="" />
+                            </div>
+                            <div class="texture-selection">
+                                <img src="/Assets/images/texture5.jpeg" alt="Texture Preview" class="texture-img" onclick="" />
+                            </div>
+                            <div class="texture-selection">
+                                <img src="/Assets/images/texture7.jpg" alt="Texture Preview" class="texture-img" onclick="" />
+                            </div>
+                            <div class="texture-selection">
+                                <img src="/Assets/images/texture8.jpg" alt="Texture Preview" class="texture-img" onclick="" />
+                            </div>
+                            <div class="texture-selection">
+                                <img src="/Assets/images/texture9.jpeg" alt="Texture Preview" class="texture-img" onclick="" />
+                            </div>
+                            <div class="texture-selection">
+                                <img src="/Assets/images/no-sign1.png" alt="Texture Preview" class="texture-img" onclick="" />
+                            </div>
+                            </div>
+
+                        </div>
+                        <div class="smpl-textures">
+                            <h4>SMPL-Textures</h4>
+                            <div class="textures">
+                                <div class="texture-selection">
+                                    <img src="/Assets/images/1.png" alt="Texture Preview" class="texture-img" onclick="" />
+                                </div>
+                                <div class="texture-selection">
+                                    <img src="/Assets/images/3.png" alt="Texture Preview" class="texture-img" onclick="" />
+                                </div>
+                                <div class="texture-selection">
+                                    <img src="/Assets/images/4.png" alt="Texture Preview" class="texture-img" onclick="" />
+                                </div>
+                                <div class="texture-selection">
+                                    <img src="/Assets/images/no-sign1.png" alt="Texture Preview" class="texture-img" onclick="" />
+                                </div>
+                                </div>
+
+                        </div>
+                        <div class="hex-color-picker">
+                            <h4>Solid Colors</h4>
+                            <div class="color-picker-container">
+        
+                                <input class="jscolor color-picker" id="colorPicker" name="color" value="#C5F955">
+                                
+                                <button class="at-btn at-btnapply" id="">Apply</button>
+                            </div>
+                            
+                        </div>
+                        <div class="upload-area">
+                            <h4>Upload your Own File</h4>
+                            <div class="centre-upload">
+                                <div class="input-group form-group at-uploadfiles mb-0">
+                                    <label class="at-uploadfilelabell" for="inputGroupFile01" id="uploadLabel">
+                                        
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40" fill="none">
+                                            <path d="M12 5l0 14" fill="#121212" stroke="white" stroke-width="0.6"></path>
+                                            <path d="M5 12l14 0" fill="#121212" stroke="white" stroke-width="0.6"></path>
+                                        </svg>
+                
+                                        
+                                    </label>
+                                    <input type="file" class="form-control" id="inputGroupFile01" name="file" />
+                                </div>
+                                <button type="submit" class="at-btn at-btnuploadd" id="">Upload</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="right-panel">
+                        
+                        <div id="modelViewDiv">
+                            <div class="toollbar">
+                                <button  value="body" onclick="switchModelPart('body')">Body</button>
+                                <button  value="upper" onclick="switchModelPart('upper')">Top</button>
+                                <button  value="lower" onclick="switchModelPart('lower')">Bottom</button>
+                            </div>
+                            <div id="stats-show" style="display: none;">
+                                <div id="message">
+                                    <p>Vertices: <span> <%= vertices %></span></p>
+                                    <p>Faces: <span><%= faces %> </span></p>
+                                </div>
+                                
+                            </div>
+                            <div class="dropdown-containerr">
+                                <button type="button" class="at-btn at-btndownload dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleMenu()">Download <!--<span class="dropdown-arrow">&#129171;</span> --></button>
+                
+                                  
+                                <div id="formatSelect" class="dropdown-menu dropdown-menu-right">
+                                    <!--<button onclick="saveOBJWithMTLLocally(summodel, textureimage)">Download as .obj</button>-->
+                                    <button class="dropdown-item" type="button" onclick="exportToGLB(summodel)">Download as GLB</button>
+                                    <button class="dropdown-item" type="button" onclick="exportToSTL(summodel)">Download as STL</button>
+                                </div>
+                            </div>
+                            <div class="toolbar-container">
+                                <div class="toolbar">
+                                    <button class="toolbar-btn" id="toggleWireframe" >
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 21.96c5.5 0 9.96-4.46 9.96-9.96 0-5.5-4.46-9.96-9.96-9.96-5.5 0-9.96 4.46-9.96 9.96 0 5.5 4.46 9.96 9.96 9.96Zm0 1.44c6.296 0 11.4-5.104 11.4-11.4S18.296.6 12 .6.6 5.704.6 12 5.704 23.4 12 23.4Z" fill="white"></path><path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M12.5 1.467a.6.6 0 0 0-.999 0l-4.43 6.645-3.087-2.573a.6.6 0 1 0-.768.922l3.121 2.6L1.354 14.6a.6.6 0 0 0 .342.992l9.152 1.615-3.5 3.999a.6.6 0 0 0 .904.79L12 17.711l3.749 4.284a.6.6 0 0 0 .903-.79l-3.5-4 9.153-1.614a.6.6 0 0 0 .341-.992l-4.983-5.537 3.121-2.601a.6.6 0 1 0-.768-.922L16.93 8.112 12.5 1.467ZM15.68 8.4 12 2.882 8.321 8.4h7.358ZM8.273 9.6h7.453L12 15.655 8.274 9.6Zm-1.164.398-4.14 4.6 7.82 1.379-3.68-5.98Zm6.101 5.979 3.68-5.98 4.14 4.6-7.82 1.38Z" fill="gray"></path></svg>
+                                        <div class="tooltip0" id="wirefTooltip">Wireframe - Off</div>
+                                    </button>
+                                    <button class="toolbar-btn" id="toggleCounts" >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"  fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-device-desktop "><path d="M3 5a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-10z"></path><path d="M7 20h10"></path><path d="M9 16v4"></path><path d="M15 16v4"></path></svg>
+                                        <div class="tooltip5" id="statsTooltip">Statistics - Off</div>
+                                    </button>
+                                    <button class="toolbar-btn" id="togglegrid">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="gray">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 6.5h2M11 18h2m-7-5v-2m12 2v-2M5 8h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1Zm0 12h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1Zm12 0h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1Zm0-12h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1Z"/>
+                                          </svg>
+                                          <div class="tooltip" id="gridTooltip">Grid - On</div>
+                                    </button>
+                                    
+
+                                    <button class="toolbar-btn" id="toggleModel">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="gray">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
+                                          </svg>
+                                          <div class="tooltip3" id="modelTooltip">Model Rotation - Off</div>
+                                    </button>
+
+                                    <button class="toolbar-btn" id="togglebackground">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="gray" stroke="gray"><path d="M19.51 3.08 3.08 19.51c.09.34.27.65.51.9.25.24.56.42.9.51L20.93 4.49c-.19-.69-.73-1.23-1.42-1.41ZM11.88 3 3 11.88v2.83L14.71 3h-2.83ZM5 3c-1.1 0-2 .9-2 2v2l4-4H5Zm14 18c.55 0 1.05-.22 1.41-.59.37-.36.59-.86.59-1.41v-2l-4 4h2Zm-9.71 0h2.83L21 12.12V9.29L9.29 21Z" ></path></svg>
+                                        <div class="tooltip4" id="backTooltip">Background - Off</div>
+                                    </button>
+
+                                    <button class="toolbar-btn" id="toggleLightRotation">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="gray" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" ><path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z"></path><path d="M6.343 17.657l-1.414 1.414"></path><path d="M6.343 6.343l-1.414 -1.414"></path><path d="M17.657 6.343l1.414 -1.414"></path><path d="M17.657 17.657l1.414 1.414"></path><path d="M4 12h-2"></path><path d="M12 4v-2"></path><path d="M20 12h2"></path><path d="M12 20v2"></path></svg>
+                                        <div class="tooltip2" id="LightTooltip">Lights Auto-Rotate - Off</div>
+                                    </button>
+
+                                    <button class="toolbar-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="gray" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" ><path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11"></path></svg>
+                                    </button>
+                                  
+                                </div>
+
+                              </div>
+                              
+                        </div>
+                        
+                    </div>
+                </div>
+        
+    </div>
+
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      init2('<%= mergedModelPath %>');
+      
+   });
+</script>
+
+<script>
+    function switchModelPart(part) {
+       const upperModelPath = 'hjc'; // Get the upper model path
+       const lowerModelPath ='hsajc'; // Get the lower model path
+       const bodyModelPath ='shvfja'; 
+       if (part === 'upper') {
+           console.log("Switching to upper model:", upperModelPath);
+           initializeFileInput(topModel); // Initialize with upper model path
+       } else if (part === 'lower') {
+           console.log("Switching to bottom model:", lowerModelPath);
+           initializeFileInput(bottomModel); // Initialize with lower model path
+       }
+       else if (part === 'body') {
+           console.log("Switching to smpl body model:", bodyModelPath);
+           initializeFileInput(bodyModel); // Initialize with lower model path
+       }
+   }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const toggleButton = document.getElementById('toggleCounts');
+      const statsDiv = document.getElementById('stats-show');
+      const statsTooltip = document.getElementById('statsTooltip');
+  
+      if (toggleButton && statsDiv) {
+        toggleButton.addEventListener('click', function() {
+          if (statsDiv.style.display === 'none') {
+            statsDiv.style.display = 'block';
+            statsTooltip.textContent = 'Statistics - On';
+          } else {
+            statsDiv.style.display = 'none';
+            statsTooltip.textContent = 'Statistics - Off';
+          }
+          statsTooltip.classList.add('show');
+
+        // Hide tooltip after a short delay (optional)
+        setTimeout(() => {
+            statsTooltip.classList.remove('show');
+        }, 1000);
+        });
+      }
+    });
+</script>
+
+
+
+<script>
+    
+    const colorPicker = document.getElementById("colorPicker");
+        const objPath = '<%= mergedModelPath %>';
+
+        colorPicker.addEventListener("input", () => {
+            const colorHex = `${colorPicker.value}`;
+
+            applyColorTexture(objPath, colorHex); // Apply selected color to the object
+        });
+  </script>

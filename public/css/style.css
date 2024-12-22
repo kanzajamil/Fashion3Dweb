@@ -24,11 +24,11 @@
 *:before{ transition: var(--transition); }
 @font-face {
     font-family: 'Nulshock Rg';
-    src: url('../fonts/nulshock/NulshockRg-Bold.eot');
-    src: url('../fonts/nulshock/NulshockRg-Bold.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/nulshock/NulshockRg-Bold.woff2') format('woff2'),
-        url('../fonts/nulshock/NulshockRg-Bold.woff') format('woff'),
-        url('../fonts/nulshock/NulshockRg-Bold.ttf') format('truetype');
+    src: url('/fonts/nulshock/NulshockRg-Bold.eot');
+    src: url('/fonts/nulshock/NulshockRg-Bold.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/nulshock/NulshockRg-Bold.woff2') format('woff2'),
+        url('/fonts/nulshock/NulshockRg-Bold.woff') format('woff'),
+        url('/fonts/nulshock/NulshockRg-Bold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -142,7 +142,7 @@ input[type="color"],
 }
 textarea.form-control{
 	resize: none;
-	height: 210px;
+	height: 170px;
 }
 .form-control::-webkit-input-placeholder { color: #666; } /* WebKit, Blink, Edge */
 .form-control:-moz-placeholder { color: #666; } /* Mozilla Firefox 4 to 18 */
@@ -164,13 +164,13 @@ input:focus,
 .form-group {
 	width: 100%;
 	float: left;
-	margin:0 0 20px;
+	margin:0 0 25px;
 }
 label {
 	color: white;
 	display: block;
 	font-weight: 400;
-	margin-bottom: 6px;
+	margin-bottom: 10px;
 }
 form p {
 	float: left;
@@ -407,22 +407,27 @@ address { font-style: italic; }
 .navbar-toggle .icon-bar{background: #fff;}
 .at-formtheme{
 	width:100%;
+	justify-content: center;
+	
 	float:left;
 }
 .at-formtheme fieldset{
 	border:0;
 	margin:0;
-	padding:0;
+	padding-bottom:20px;
 	width:100%;
 	float:left;
 	position:relative;
+	
 }
 .at-formtheme fieldset legend {
 	color: white;
 	font-size: 32px;
 	font-weight: 700;
 	line-height: 40px;
-	margin-bottom: 0px;
+	text-align: center;
+	margin-bottom: 7px;
+	padding: 3px;
 }
 .at-inputwithicon{position:relative;}
 .at-inputwithicon i{
@@ -440,6 +445,8 @@ address { font-style: italic; }
 	z-index:1;
 	position:relative;
 }
+
+
 /*==========================================================================================
 		For Mobile Nav use this code in Responsive.css desired Query
 ==========================================================================================*/
@@ -558,6 +565,28 @@ address { font-style: italic; }
 	justify-content: center;
 	color: var(--themeConifer);
 }
+.at-btnupload{
+	display: flex;
+	font-size: 16px;
+	min-width: 350px;
+	line-height: 40px;
+	align-items: center;
+	border-radius: 30px;
+	justify-content: center;
+	color: var(--themeConifer);
+}
+.at-btnEdit{
+	display: flex;
+	font-size: 16px;
+	min-width: 110vh;
+	line-height: 40px;
+	align-items: center;
+	border-radius: 30px;
+	justify-content: center;
+	color: var(--themeConifer);
+}
+
+#modelView{width: 110vh; height: 90vh; background-color: black; margin-bottom: 15px;}
 .at-btnsignup{
 	min-width: 100px;
 	line-height: 40px;
@@ -578,25 +607,38 @@ address { font-style: italic; }
 /* =============================================
 			Banner Style					
 ============================================= */
-.at-hombanner{padding: 90px 0;}
+.at-hombanner{padding: 70px 0;}
+.at-hombannerr{padding: 30px 0;}
+.at-bannercontentholderr,
 .at-bannercontentholder{
 	padding: 0 15px;
 	max-width: 1045px;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
 	text-align: center;
 	margin: 0 auto 90px;
 }
+.at-bannercontentholderr h1,
 .at-bannercontentholder h1{
 	margin: 0 0 15px;
 	text-align: center;
 	font-family: 'Nulshock Rg';
 	font-size: var(--themeTitle);
 }
+.at-bannercontentholderr h1 span,
 .at-bannercontentholder h1 span{display: block;}
 .at-bannercontentholder p{
 	font-size: 18px;
 	margin: 0 0 25px;
 	color: var(--themeWhiteColor);
 }
+.at-bannercontentholderr p{
+	font-size: 18px;
+	margin: 0 0 15px;
+	color: var(--themeWhiteColor);
+}
+
 .at-bannercontentholder .at-addnavloginsignup{justify-content: center;}
 .at-bannercontentholder .at-addnavloginsignup li .at-btngradiant:hover{background: var(--themeGradiantHover);}
 .at-bannervideosholder{
@@ -686,10 +728,10 @@ address { font-style: italic; }
 	rgba(255,255,255,0) 100%);
 }
 .at-generatearea{
-	gap: 60px;
+	gap: 20px;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: space-evenly;
 }
 .at-generatearea + .at-generatearea{margin: 80px 0 0;}
 .at-generatecontent{
@@ -761,6 +803,21 @@ address { font-style: italic; }
 	padding: 0 15px;
     max-width: 1075px;
     position: relative;
+}
+.faqs{
+	margin: 0 auto;
+	padding: 0 15px;
+	max-width: 875px;
+	position: relative;
+
+}
+.accordion-button::after {
+    color: #ffffff !important; /* Change to desired color */
+}
+
+/* Optional: Change color when accordion is open */
+.accordion-button:not(.collapsed)::after {
+    color: #fff !important; /* Change when expanded */
 }
 .at-whymodelarea:after{
 	clear: both;
@@ -936,9 +993,9 @@ address { font-style: italic; }
 	font-size: 18px;
 	font-weight: 600;
 	margin: 0 0 24px;
-	background: -webkit-linear-gradient(left, #C5F955, #E8FCBE);
 	
-	-webkit-text-fill-color: transparent;
+	color: -webkit-linear-gradient(left, #C5F955, #E8FCBE);
+	
 }
 .at-addnav{
 	padding: 0;
@@ -1137,18 +1194,20 @@ address { font-style: italic; }
 .at-uploadarea {
 	gap: 25px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
+
 .at-uploadform {
 	flex-shrink: 0;
-	max-width: 496px;
+	max-width: 350px;
+	flex-direction: column;
 }
 .at-uploadfiles .form-control { display: none; }
 .at-uploadfilelabel {
 	gap: 8px;
 	width: 100%;
 	display: flex;
-	height: 240px;
+	height: 200px;
 	cursor: pointer;
 	margin-bottom: 0;
 	align-items: center;
@@ -1200,6 +1259,10 @@ address { font-style: italic; }
 	align-items: center;
 	justify-content: center;
 }
+
+#imagePreview{
+	max-width: 200px; height: 180px; padding:10px;
+}
 .at-btndownload {
 	min-width: 121px;
 	line-height: 42px;
@@ -1243,6 +1306,51 @@ address { font-style: italic; }
 	margin: 0 auto;
 	max-width: 380px;
 }
+.at-loginsignupareaa {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	background-color: #1E1E1E;
+	border-radius: 20px;
+	padding: 50px;
+	margin: 0 auto;
+	max-width: 1080px;
+	align-items: center;
+}
+.imageHelp{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	padding-left: 20px;
+	padding-right: 70px;
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+.imageHelp h2{
+	font-weight: bold;
+	color: #C5F955;
+}
+.imageHelp p{
+	text-align: justify;
+}
+
+.vertical-line {
+	border-left: 0.5px solid #ffffff34; /* Adjust thickness and color */
+	height: 400px; /* Adjust height as needed */
+	margin-right: 50px;/* Optional: Add spacing around the line */
+	
+  }
+  
+.at-loginformm{
+	width: 50%;
+}
+
+.at-loginformm .form-group { margin-bottom: 10px; }
+.at-loginformm .form-group:nth-child(2) { margin-bottom: 16px; }
+.at-loginformm .form-group:nth-child(3) { margin-bottom: 8px; }
+
 .at-loginform .form-group { margin-bottom: 10px; }
 .at-loginform .form-group:nth-child(2) { margin-bottom: 16px; }
 .at-loginform .form-group:nth-child(3) { margin-bottom: 8px; }
@@ -1254,6 +1362,14 @@ address { font-style: italic; }
 	line-height: 40px;
 	color: var(--themeBlackRussian);
 	background: var(--themeConifer);
+}
+.at-btnsubmit {
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 40px;
+	color: var(--themeBlackRussian);
+	background: var(--themeConifer);
+	margin-top: 20px;
 }
 .at-forgotpassword {
 	font-size: 14px;
@@ -1301,6 +1417,10 @@ address { font-style: italic; }
 	color: var(--themeConifer); 
 }
 
+.modelLines h3{
+	margin-left: 10px;
+	font-family: "Outfit";
+}
 model-viewer {
 	width: 80vh;
 	height: 60vh;
@@ -1311,16 +1431,152 @@ model-viewer {
 .models-container{
 	display: flex;
 	flex-direction: row;
-	padding: 10px;
+	flex-wrap: wrap;
+	
 }
 
 .model-card{
 	display: flex;
 	flex-direction: column;
 	padding: 10px;
+	gap:10px;
 	border-radius: 30px;
 	overflow: hidden;
+	width: 300px;
+	height: 347px;
 }
+
+.model-card-info{
+	
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content:space-around;
+	gap: 2px;
+}
+.model-card-icon{
+	justify-content: center;
+	align-items: center;
+	background-color: #262626;
+	border-radius: 10px;
+	padding: 2px 4px 4px 4px;
+
+}
+.model-inner-info{
+	width: 60%;
+
+}
+.model-inner-info h5{
+	font-size: 0.875rem;
+	font-weight: bold;
+	margin-bottom: 0px;
+	color: #BFBFBF;
+}
+.model-inner-info p{
+	font-size: 0.75rem;
+	margin-bottom: 0px;
+	
+}
+.three-dot-icon {
+    position: relative;
+	padding: 3px; /* Needed for proper positioning of the dropdown */
+}
+
+.three-dot-icon:hover{
+	background-color: #262626;
+	padding: 3px;
+	border-radius: 10px;
+}
+
+.custom-dropdown-menu {
+    display: none; /* Initially hidden */
+    position: absolute;
+    background-color: #1e1e1e;
+    border: 0.3px solid #3f3f3f;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    width: 100px;
+	padding: 4px;
+	overflow: hidden;
+	bottom: 110%; /* Position it above the trigger */
+    left: 0%; /* Center align with the trigger */
+    transform: translateX(-68%);
+}
+
+.custom-dropdown-item-edit {
+    padding: 6px 16px;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+}
+.custom-dropdown-item-del{
+	padding: 6px 16px;
+    color: red;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+
+}
+
+.custom-dropdown-item-edit:hover {
+    background-color: #3f3f3f;
+    border-radius: 4px;
+}
+
+.custom-dropdown-item-del:hover {
+    background-color:rgba(255, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+
+
+.custom-dropdown-toggle {
+    cursor: pointer;
+}
+
+
+	
+.flashing{
+	width: 50%;
+	margin: 0 auto;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+	align-self: center;
+}
+
+
+  .alert {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+	align-self: center;
+	justify-content: center;
+	justify-items: center;
+	align-content: center;
+	align-items: center;
+	text-align: center;
+    position: relative;
+    transition: opacity 0.5s ease;
+  }
+
+  .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
 /* =============================================
 				SignUp Style					
 ============================================= */
@@ -1328,3 +1584,844 @@ model-viewer {
 .at-signupform .form-group:first-child,
 .at-signupform .form-group:nth-child(5) { margin-bottom: 12px; }
 .at-signupform .form-group:nth-child(4) { margin-bottom: 8px; }
+
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #555;
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none; /* Hide image by default */
+}
+
+.user-avatar .user-initials {
+    color: white;
+    font-weight: bold;
+}
+
+.modal-body{
+	padding-top: 10px !important;
+}
+/* Modal link styling */
+#userModal .modal-dialog{
+	margin-top: 80px;
+}
+.modal-link {
+    
+    text-decoration: none;
+}
+
+.modal-link:hover {
+    text-decoration: underline;
+}
+
+.custom-modal-dialog {
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	width: 300px; /* Adjust the width as needed */
+	height: auto;  /* Adjust height or make it responsive */
+}
+
+
+#userModal .modal-dialog{
+	margin-right: 30px !important; 
+	max-width: 320px !important;
+	
+}
+
+.modal-header{
+	border-bottom: #474747;
+}
+
+.custom-hr {
+    border: none;              /* Remove default border */
+    height: .5px;              /* Set thickness */
+    background-color:  #C5F955;   /* Set color */
+     
+	margin-right: 10px;
+	margin-left: 10px;          /* Set top and bottom margin */
+}
+/* Modal customization */
+.modal-content {
+	border-radius: 8px;
+	overflow: hidden;
+	background-color: #1E1E1E;
+	border: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+.modal-body ul {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	
+}
+
+.modal-body ul li{
+	padding-top: 3px;
+	height: 40px;
+	list-style-type: none;
+	align-items: center;
+}
+.modal-link{
+	height: 35px !important;
+	align-content: center;
+	padding-left: 4px;
+}
+.modal-link:hover {
+    background-color: #555 !important; /* Change background on hover */
+    color: white !important; /* Change text color on hover */
+    text-decoration: none !important; 
+	border-radius: 8px !important;/* Ensure no underline on hover */
+}
+
+.terms-of-service{
+	font-size: 16px; color: #696969;
+}
+
+.btn-secondary{
+	border: 1px solid gray; color: gray; background-color: #262626;
+}
+
+.modal-body ul li a {
+	color: gray;
+	text-decoration: none;
+	display: block;
+	
+}
+
+hr{
+	
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+.modal-body ul li a:hover {
+	background-color: #f0f0f0;
+	color: #0056b3;
+}
+
+.at-bannercontentholderr h1 {
+	margin-top: 20px;
+    margin-left: 40px;
+    text-align: left;
+    font-family: 'Open Sans';
+	font-weight: 700;
+}
+
+
+.at-settingsarea{
+	width: 100%;
+	
+    margin-left: 90px;
+    max-width: 600px;
+}
+
+.form-group h3{
+	font-weight: 500;
+}
+
+.customm-hr{
+
+	border: none;              /* Remove default border */
+    height: 1px;              /* Set thickness */
+    background-color:  #C5F955;   /* Set color */
+    width: 100%;
+	
+
+}
+
+.at-inputwithicon a{
+	top: 3.25px;
+    right: 4px;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    line-height: 40px;
+    position: absolute;
+    text-align: center;
+	align-content: center;
+	color: #C5F955;
+}
+
+.at-inputwithicon a:hover{
+	background-color: #555;
+	border-radius: 8px;
+}
+
+.at-inputwithicon .form-control {
+	height: 49px;
+}
+
+.at-btnnlogin{
+	display: flex;
+	font-size: 16px;
+	width: 200px;
+	line-height: 40px;
+	align-items: center;
+	border-radius: 30px;
+	justify-content: center;
+	color: var(--themeConifer);
+}
+
+.settings-sections{
+	margin-top: 50px;
+	height: min-content;
+}
+
+.password-section{
+	margin-top: 460px;
+}
+
+.delete-sections{
+	margin-top: 80px;
+}
+
+
+
+/* Hafsa styles */
+
+
+
+
+/* Main dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Toggle button styling */
+.dropdown-toggle {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    color: var(--themeConifer);
+	background: rgba(197, 249, 85, 10%);
+    min-width: 140px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 10px 0;
+    z-index: 1;
+}
+
+/* Individual dropdown items */
+.dropdown-item {
+    color: var(--themeConifer);
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    color: var(--themeBlackRussian);
+	background: var(--themeConifer);
+
+}
+
+/* Show the dropdown on click */
+.show .dropdown-menu {
+    display: block;
+}
+
+
+.viewer-container {
+	position: relative;
+	width: 80%;
+	height: 70%;
+	background-color: #1e1e1e;
+	border-radius: 10px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+  }
+  canvas {
+	width: inherit !important;
+	height: inherit !important;
+	display: block;
+  }
+ 
+
+  .bottom-panel {
+	position: absolute;
+	top:90px;
+	left: 90%;
+	transform: translateX(-50%);
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+  }
+  .bottom-panel .thumbnail {
+	width: 60px;
+	height: 60px;
+	border: 2px solid transparent;
+	border-radius: 5px;
+	cursor: pointer;
+  }
+  .bottom-panel .thumbnail.active {
+	border-color: #00e676;
+  }
+  .dropdown-container {
+	position: relative;
+	display: inline-block;
+  }
+
+  .dropdown-button {
+	background-color: #007bff;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+  }
+
+  .dropdown-button:hover {
+	background-color: #0056b3;
+  }
+
+  /* Dropdown menu styling 
+  
+	.dropdown-menu {
+		display: none;
+		position: absolute;
+		background-color: #333;
+		min-width: 160px;
+		border-radius: 5px;
+		box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+		z-index: 10;
+		right: 0; 
+	  }
+
+  .dropdown-menu button {
+	background: none;
+	color: white;
+	padding: 10px 20px;
+	text-align: left;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+
+  }
+
+  .dropdown-menu button:hover {
+	background-color: #555;
+  }
+  */
+
+  
+
+
+  .at-modeleditarea{
+	display: flex;
+	justify-content:space-between;
+  }
+
+
+
+  .left-panel{
+	 width: 25%;
+	 display: flex;
+	 row-gap: 20px;
+	 flex-direction: column;
+	 justify-content: center;
+	 
+	 padding: 1%;
+  }
+
+
+
+
+  .color-picker-container {
+    display: flex;
+    align-items: center;
+	  
+	padding: 7px;
+	justify-content: space-around;
+    font-family: Arial, sans-serif;
+    
+}
+
+.color-picker-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.upload-area{
+	display: flex;
+	flex-direction: column;
+}
+  
+
+.color-picker {
+    width: 140px;
+    height: 30px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+	
+    cursor: pointer;
+}
+
+.color-display {
+    font-size: 1rem;
+    color: #555;
+	
+}
+
+.color-display span {
+    font-weight: bold;
+    color: #C5F955; /* Default color */
+}
+
+.centre-upload{
+	display: flex;
+	gap: 10px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+}
+
+.at-btnapply{
+	display: flex;
+	font-size: 16px;
+	min-width: 90px;
+	line-height: 30px;
+	align-items: center;
+	border-radius: 7px;
+	justify-content: center;
+
+	color: var(--themeConifer);
+}
+
+  .at-uploadfilelabell {
+	gap: 8px;
+	width: 90%;
+	display: flex;
+	height: 80px;
+	cursor: pointer;
+	margin-bottom: 0;
+	padding: 10px;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	border-radius: 8px !important;
+	-webkit-transition: all 300ms ease-in-out;
+	-moz-transition: all 300ms ease-in-out;
+	-ms-transition: all 300ms ease-in-out;
+	-o-transition: all 300ms ease-in-out;
+	transition: all 300ms ease-in-out;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+	.at-uploadfilelabell span,
+	.at-uploadfilelabell svg rect {
+		-webkit-transition: all 300ms ease-in-out;
+		-moz-transition: all 300ms ease-in-out;
+		-ms-transition: all 300ms ease-in-out;
+		-o-transition: all 300ms ease-in-out;
+		transition: all 300ms ease-in-out;
+		font-size: x-small;
+
+	}
+	.at-uploadfilelabell:hover,
+	.at-uploadfilelabell:focus{ border-color: var(--themeConifer); }
+	.at-uploadfilelabell:hover svg rect,
+	.at-uploadfilelabell:focus svg rect { fill: var(--themeConifer); }
+	.at-uploadfilelabell:hover span,
+	.at-uploadfilelabell:focus span { color: var(--themeConifer);}
+
+	.input-group{
+		justify-content: center !important;
+	}
+
+	.textures{
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		justify-content: center;
+
+	}
+
+	.texture-selection {
+		width: 55px; /* Small size */
+		height: 55px;
+		border-radius: 10px; /* Rounded corners */
+		overflow: hidden; /* Ensure the image fits within the div */
+		border: 2px solid #ccc; /* Default border color */
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+		cursor: pointer; /* Show that it’s clickable */
+		transition: border-color 0.2s; /* Smooth border color transition */
+	  }
+	  
+	  .texture-selection:hover {
+		border-color: #C5F955; /* Border changes to red on hover */
+	  }
+	  
+	  .texture-img {
+		width: 100%; /* Ensure the image fills the div */
+		height: 100%;
+		object-fit: cover; /* Cover the div area without distortion */
+	  }
+
+	  .at-btnuploadd{
+		display: flex;
+		font-size: 16px;
+		min-width: 90%;
+		line-height: 35px;
+		align-items: center;
+		border-radius: 10px;
+		justify-content: center;
+		color: var(--themeConifer);
+	}
+
+	
+  .right-panel{
+	 width: 75%;
+	 position: relative;
+	 
+  }
+
+  #modelViewDiv{width: 100%; height: 100%; }
+
+  #stats-show{
+	position: absolute;
+	top: 10px;
+	left: 100px;
+	width: 170px;
+	align-content: center;
+	border-radius: 10px;
+	padding-right: 25px;
+	padding-left: 25px;
+	padding-top: 12px;
+	padding-bottom: 10px;
+	height: 70px;
+	background-color: rgba(128, 128, 128, 0.2) ;
+	
+	
+  }
+
+ #message p{
+	margin-bottom: 4px;
+	color: #fff;
+	display: flex;
+	justify-content: space-between;
+	
+  }
+
+  .dropdown-containerr{
+	position: absolute;
+	top: 15px;
+	right: 80px;
+  }
+
+  .at-btndownload{
+	position: relative;
+	display: flex;
+	padding-left: 10px;
+	font-size: 16px;
+	min-width: 140px;
+	line-height: 35px;
+	align-content: center ;
+	align-items: center;
+	border-radius: 10px;
+	justify-content:space-evenly;
+	color: var(--themeConifer);
+}
+
+.dropdown-toggle{
+	height: 40px !important;
+	width: 130px !important;
+	color: var(--themeConifer) !important;
+	background: rgba(197, 249, 85, 10%) !important;
+}
+
+.dropdown-toggle:hover{
+	color: var(--themeBlackRussian) !important;
+	background: var(--themeConifer)  !important;
+
+}
+
+.dropdown-arrow {
+    font-size: 25px; /* Adjust size as needed */
+	text-align: center;
+	line-height: 2px;
+    margin-left: 1px;
+	margin-top: 20px; /* Space between text and arrow */
+}
+
+
+
+  .toollbar {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	display: flex;
+	flex-direction: column;
+	
+	gap: 10px;
+  }
+  .toollbar button {
+	background: #333;
+	border: none;
+	border-radius: 5px;
+	color: white;
+	padding: 10px;
+	cursor: pointer;
+  }
+
+  .toolbar-container {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+  }
+  
+  .toolbar {
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #212121; /* Slightly lighter than the background */
+	border-radius: 12px;
+	border-color: white;
+	padding: 5px;
+	gap: 1px; /* Add space between buttons */
+  }
+  
+  .toolbar-btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 1px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 40%;
+	transition: background 0.3s;
+  }
+  
+  .toolbar-btn:hover {
+	background-color: #333;
+  }
+
+  .toolbar-btn svg:hover{
+	stroke: #C5F955;
+  }
+  
+  .tooltip {
+    display: none; /* Hidden by default */
+    position: absolute;
+    left: -120px; /* Position the tooltip to the left of the button */
+    top: 37%;
+    transform: translateY(-50%);
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+    width: 100px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip2 {
+    display: none; /* Hidden by default */
+    position: absolute;
+    left: -190px; /* Position the tooltip to the left of the button */
+    top: 78%;
+    transform: translateY(-50%);
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+	font-size: 13px;
+    width: 170px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip0 {
+    display: none; /* Hidden by default */
+    position: absolute;
+    left: -150px; /* Position the tooltip to the left of the button */
+    top: 10%;
+    transform: translateY(-50%);
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+	font-size: 13px;
+    width: 130px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip3 {
+    display: none; /* Hidden by default */
+    position: absolute;
+    left: -170px; /* Position the tooltip to the left of the button */
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+	font-size: 13px;
+    width: 150px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip4 {
+    display: none; /* Hidden by default */
+    position: absolute;
+    left: -151px; /* Position the tooltip to the left of the button */
+    top: 65%;
+    transform: translateY(-50%);
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+	font-size: 13px;
+    width: 130px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip5 {
+    display: none; /* Hidden by default */
+    position: absolute;
+    left: -142px; /* Position the tooltip to the left of the button */
+    top: 23%;
+    transform: translateY(-50%);
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+	font-size: 13px;
+    width: 120px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+/* Tooltip arrow */
+.tooltip0::after,
+.tooltip5::after,
+.tooltip4::after,
+.tooltip3::after,
+.tooltip2::after,
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent #555; /* Arrow pointing left */
+}
+
+/* Show tooltip when hovering over the button */
+.toolbar-btn:hover .tooltip0,
+.toolbar-btn:hover .tooltip5,
+.toolbar-btn:hover .tooltip4,
+.toolbar-btn:hover .tooltip3,
+.toolbar-btn:hover .tooltip2,
+.toolbar-btn:hover .tooltip
+{
+    display: block;
+    opacity: 1;
+}
+
+.accordion-collapse {
+    background-color: #1e1e1e !important; /* Light gray background */
+}
+/* Change background color of the accordion header */
+.accordion-button {
+    background-color: #3f3f3f !important; /* Example: a reddish color */
+    color: white !important; /* Text color */
+}
+
+/* Optional: Change the hover background color */
+
+.accordion-body{
+	color: white;
+}
+/* Optional: Change the active state background color */
+.accordion-button:focus {
+    background-color: #C5F955!important; /* Another shade of red */
+    color: black !important;
+}
+.accordion-item {
+	border: 1px solid #3f3f3f !important; /* Change to your desired color */
+	/* Optional: Adjust border-radius if needed */
+	margin: 10px;
+  }
+
+  /* Border for the expanded accordion header */
+  .accordion-header {
+	border-bottom: 2px solid #C5F955; /* Match the same color */
+  }
+
+  /* Change border color on hover */
+
+  #loadingMessage {
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background-color: rgba(0, 0, 0, 0.5); /* Black with transparency */
+	  color: white;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  z-index: 1000; /* Ensure it appears above other elements */
+	  pointer-events: all; /* Disable interactions with other elements */
+  }
+
+  .loading-content {
+	  font-size: 24px;
+	  font-weight: bold;
+  }
+
