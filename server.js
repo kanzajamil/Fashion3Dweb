@@ -4,7 +4,6 @@ var session = require("express-session");
 var expressLayouts = require("express-ejs-layouts");
 let app = express();
 
-//const fileUpload = require("express-fileupload");
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -15,15 +14,13 @@ app.use(cookieParser());
 app.use(session({ secret: "Shh, its a secret!" ,resave: false,
 saveUninitialized: true}));
 
-
-
-
 const common = require("./middlewares/common");
 const logger = require("./middlewares/logger");
 const sessionauth = require("./middlewares/sessionauth");
 const admin = require("./middlewares/admin");
 const isLoggedin = require("./middlewares/authMiddleware");
 const ensureAuthenticated = require("./middlewares/authenticated");
+const ensurAuthenticated = require("./middlewares/authenti");
 
 
 //app.use(sessionauth);
@@ -36,14 +33,11 @@ app.get("/views", (req, res) => {
   res.send({ visits });
 });
 
-/*app.use(fileUpload({
-  useTempFiles : true,
-}));*/
+
 
 app.use(common);
 app.use("/", require("./routes/site/auth"));
 
-//app.use("/admin", sessionauth, admin, require("./routes/admin/newz"));
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
 
@@ -67,8 +61,6 @@ app.use(delAccRoutes);
 const helpRoutes = require("./routes/help.js");
 app.use(helpRoutes);
 
-const animRoutes = require("./routes/animationRoutes.js");
-app.use(animRoutes);
 
 app.get("/", function (req, res) {
   res.render("index");
@@ -81,27 +73,23 @@ app.get("/model-edit", function (req, res) {
   res.render("model-edit");
 });
 
-
-app.get("/user-dash", ensureAuthenticated, function (req, res) {
+app.get("/user-dash", ensurAuthenticated, function (req, res) {
   res.render("user-dash");
 });
 
-app.get("/try-now", function (req, res) {
+app.get("/try-now", ensureAuthenticated, (req, res) => {
   let modelPath = null;
-  res.render("try-now", {modelPath});
+  res.render("try-now", { modelPath, showModal: res.locals.showModal || false });
 });
 
 app.get("/image-to-3d", function (req, res) {
   res.render("image-to-3d");
 });
-app.get("/modeledit/:modelId", function (req, res) {
-  res.render("modeledit",{ scrollTo: 'at-main' });
+
+app.get("/modeledit/:modelId", ensurAuthenticated, function (req, res) {
+  res.render("modeledit",{ scrollTo: "lefti"});
 });
 
-app.get("/animate/:modelId", function (req, res) {
-  let animatedModelPath = null;
-  res.render("animate", {animatedModelPath});
-});
 
 
 app.get("/settings", function (req, res) {

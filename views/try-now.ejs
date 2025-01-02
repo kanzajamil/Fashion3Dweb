@@ -46,6 +46,14 @@
                             
                         </fieldset>
                         <button type="submit" class="at-btn at-btnupload" id="just">Generate</button>
+                        <div class="noteimp">
+                            <h5>Note</h5>
+                            <p>- Upload image atleast of 1000px x 1000px. <br> 
+                                - Ensure the image is clear, well-lit, and not blurry.  <br>
+                                - The image should feature a human wearing clothes.  <br>
+                                - Supported clothing types: shirts, pants, skirts, & shorts (both long and short). <br> 
+                                - Avoid busy backgrounds for best results.  </p>
+                            </div>
                     </form>
                     <div>
                         <div id="loadingMessage" style="display: none;">
@@ -59,7 +67,7 @@
                         <ul class="at-addnavloginsignup">
                             <li><a class="at-btn at-btngradiant at-btnEdit" href="/modeledit/<%= latestModelId %>">EDIT</a></li>
                         </ul>
-                        <p>Model Path: <%= modelPath ? modelPath : 'No model path available' %></p>
+                        
                         
                         <script>
                             console.log('Model path received:', '<%= modelPath %>');
@@ -84,6 +92,68 @@
                 </div>
                 
             </div>
+            <!-- Modal HTML -->
+            <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                       
+                        <div class="modal-body">
+                            <div class="insidecont">
+                            
+                                <div class="at-splashscreen2">
+                                    <img src="/Assets/images/splash-screen.jpg" alt="" />
+                                </div>
+                                <div class="at-flexcon"> 
+                                    <div class="at-logoarea">
+                                        <strong class="at-logo"><a href="javascript:void(0);"><img src="/Assets/images/logo.svg" alt=""></a></strong>
+                                    </div> 
+                                    <div class="at-loginsignarea">        
+                                        
+                                        <p>You need to log in or sign up to access this page.</p>                                                                                                                                                                                               
+                                        <a href=/signup class="at-btn at-btnlogin2">
+                                            <span class="login-text">Sign Up</span>
+                                            
+                                        </a>
+                                        <div class="d-flex align-items-center">
+                                            
+                                            <span class="mx-2">or</span>
+                                            
+                                          </div>
+
+                                          <a href=/login class="at-btn at-btnlogin2">
+                                            <span class="login-text">Log In</span>
+                                            
+                                        </a>
+                                          
+                                          
+                                        
+                                    </div>  
+                                </div>
+                            
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="pageData" data-show-modal="<%= showModal %>"></div>
+
+            <!-- Trigger the modal dynamically -->
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    // Get the `showModal` value from the DOM
+                    const pageData = document.getElementById("pageData");
+                    const showModal = pageData.getAttribute("data-show-modal") === "true";
+            
+                    if (showModal) {
+                        const authModal = new bootstrap.Modal(document.getElementById("authModal"));
+                        authModal.show();
+                    }
+                });
+            </script>
+            
+            
+
         </div>	
     </div>
 

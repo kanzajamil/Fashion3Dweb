@@ -1,8 +1,14 @@
 let renderedobj;
 let summodel;
-let textureimage;
+var textureimage;
+var toptexture="";
+var bodytexture="";
+var bottomtexture="";
+var objecttype="";
 let selectedObject;
 const objects = []; // To store each part
+
+
 
 function imo(){
     console.log("hbjvkmc");
@@ -11,8 +17,10 @@ function imo(){
 
 let currentModelPath = ''; // Global variable to keep track of the current model path
 
-function initializeFileInput(model) {
+function initializeFileInput(model, objtype) {
     console.log(renderedobj);
+    objecttype=objtype;
+    console.log(objecttype)
 
     removeHighlightIfApplied(selectedObject);
     
@@ -41,7 +49,82 @@ function initializeFileInput(model) {
     fileInput.addEventListener('change', function(event) {
         filetinker(event.target, model); // Pass modelpath dynamically
     });
+    
 }
+function loadtextures(t,b,bd){
+    console.log("summoned");
+}
+
+async function savechanges() {
+    closedownloadModal2();
+    const urlParts = window.location.pathname.split('/');
+    const modelId = urlParts[urlParts.length - 1]; 
+
+    const textures = {
+        top: toptexture,
+        bottom: bottomtexture,
+        body: bodytexture,
+    };
+
+    console.log(textures);
+
+    try {
+        const response = await fetch(`/modeledit/${modelId}/save-textures`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(textures),
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            alert('Changes Saved!');
+            console.log('Textures saved successfully:', result);
+        } else {
+            console.error('Failed to save textures:', response.status);
+        }
+    } catch (error) {
+        console.error('Error saving textures:', error);
+    }
+}
+
+
+
+function selectTexture(texturePath) {
+    // Get the file input element
+    const fileInput = document.getElementById("inputGroupFile01");
+
+    // Notify the user about the selected texture
+    console.log("Texture selected:", texturePath);
+
+    // Create a Blob object for the texture file
+    fetch(texturePath)
+        .then((response) => response.blob())
+        .then((blob) => {
+            // Create a File object
+            const file = new File([blob], "selectedTexture.jpeg", { type: "image/jpeg" });
+
+            // Simulate the file selection
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            fileInput.files = dataTransfer.files;
+
+            // Log the file for debugging
+            //console.log(selectedObject);
+            //filetinker(fileInput.files[0],selectedObject);
+            console.log("File added to input:", fileInput.files[0]);
+            filetinker(fileInput, selectedObject); 
+            console.log("textureapplied bfghjnkm");
+
+        })
+        .catch((error) => {
+            console.error("Error selecting texture:", error);
+        });
+        
+    
+}
+
 
 // Function to clear the current model/scene
 function clearCurrentModel() {
@@ -84,6 +167,7 @@ function loadTexturelessModel(objPath) {
 }
 
 function exportToGLB(object) {
+    closedownloadModal();
     object=summodel;
     const exporter = new THREE.GLTFExporter();
 
@@ -100,6 +184,7 @@ function exportToGLB(object) {
 }
 function exportToSTL(object) {
     // Assuming 'renderedobj' contains your Three.js object
+    closedownloadModal();
     const exporter = new THREE.STLExporter();
 
     // Export the object to STL format
@@ -131,8 +216,8 @@ function filetinker(inputElement,model) {
         reader.onload = function(event) {
             const textureDataURL = event.target.result; 
             textureimage=textureDataURL; // This is the image file as a Data URL
-              
-            generateTexture(model, textureDataURL, 1.0);  // Pass the Data URL to your function
+            
+            generateTexture(model,textureDataURL , 1.0);  // Pass the Data URL to your function
         };
 
         // Read the file as a Data URL (base64 string)
@@ -146,33 +231,59 @@ function toggleMenu() {
     const menu = document.getElementById('formatSelect');
     menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
   }
+  function toggleMenu2() {
+    const menu = document.getElementById('formatSelectt');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  }
   
 
  
-  
+  function closedownloadModal(){
+    document.getElementById('formatSelect').style.display = 'none';
+  }
 
- 
+  function closedownloadModal2(){
+    document.getElementById('formatSelectt').style.display = 'none';
+  }
   
-  window.onclick = function (event) {
-    const menu = document.getElementById('formatSelect');
-    if (event.target !== menu && event.target.tagName !== 'BUTTON') {
-      menu.style.display = 'none';
-    }
-  };
+  
 
   let firsttexture=false;
   function generateTexture(obj, texturePath, scaleFactor = 1.0) {
+    if (!texturePath) {
+        console.error('Texture data URL is not defined!');
+        return;
+    }
+    console.log("Texture Path:", texturePath);  // Check this in the console
+
+    if(objecttype=="top"){
+        console.log("xaviersobased");
+        toptexture=texturePath;
+    }
+    if(objecttype=="bottom"){
+        console.log("xaviercring");
+        bottomtexture=texturePath;
+    }
+    if(objecttype=="body"){
+        console.log("xanoy");
+        bodytexture=texturePath;
+    } 
+   
     firsttexture=true;
     console.log("successs");
     // Load texture and apply it to the existing model
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load(texturePath, () => {
+        console.log('Texture loaded successfully'); // Add this line to confirm it's loaded
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
+    }, undefined, (error) => {
+        console.error('Error loading texture:', error);
     });
     
+    
     // Apply texture to the rendered object (assuming it's already rendered)
-    renderedobj.traverse((child) => {
+    obj.traverse((child) => {
         if (child.isMesh) {
             const geometry = child.geometry;
             geometry.computeBoundingBox();
@@ -191,11 +302,13 @@ function toggleMenu() {
           
 
             geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
-            child.material = new THREE.MeshBasicMaterial({
-                map: texture,
-                side: THREE.DoubleSide,
-                shininess: 5, // Adjust shininess to add some gloss
-                flatShading: true,
+            child.material = new  THREE.MeshStandardMaterial({
+                map: texture,       // Apply the texture
+                roughness: 1,       // Adjust roughness for material surface appearance
+                side: THREE.DoubleSide, // Make sure both sides of the geometry are visible
+                flatShading: false, // Ensure smooth shading (not flat)
+                metalness: 0.1,     // Low metalness for a more matte look
+                normalMap: child.material.normalMap,
             });
             child.userData.originalMaterial = child.material;
 
@@ -612,6 +725,56 @@ toggleLightRotationButton.addEventListener('click', () => {
         renderer.setSize(width, height);
     });*/
     
+// Function to open the modal
+function openSaveAsModal() {
+    closedownloadModal2();
+    document.getElementById('saveAsModal').style.display = 'block';
+}
+// Function to close the modal
+function closeSaveAsModal() {
+    document.getElementById('saveAsModal').style.display = 'none';
+}
+
+async function saveAsModel() {
+    const newTitle = document.getElementById('newModelName').value; // Get the new model name from the input
+    if (!newTitle) {
+        alert('Please enter a model name.');
+        return;
+    }
+
+    const urlParts = window.location.pathname.split('/');
+    const modelId = urlParts[urlParts.length - 1]; // Extract model ID from URL
+
+    const textures = {
+        top: toptexture,
+        bottom: bottomtexture,
+        body: bodytexture,
+        newTitle, // Send the new title along with the textures
+    };
+    closeSaveAsModal();
+    try {
+        const response = await fetch(`/modeledit/${modelId}/save-as`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(textures),
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Model saved as new model successfully:', result);
+            alert('Model saved as new model!');
+            closeSaveAsModal(); // Close the modal after successful save
+        } else {
+            console.error('Failed to save model as new model:', response.status);
+            alert('Failed to save model as. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error saving model as:', error);
+        alert('An error occurred while saving model as.');
+    }
+}
 
 
 
@@ -712,10 +875,39 @@ function removeHighlightIfApplied(obj) {
 }
 
 
-
-  function applyColorTexture(objPath, colorHex, scaleFactor = 1.0) {
-    firsttexture=true;
+function applyColorTexture(objPath, colorHex, scaleFactor = 1.0) {
     const color = new THREE.Color(colorHex);
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Set canvas size (optional: adjust for your use case)
+    canvas.width = 512;
+    canvas.height = 512;
+
+    // Fill the canvas with the color
+    ctx.fillStyle = color.getStyle();
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Create a texture from the canvas
+    const texture = new THREE.CanvasTexture(canvas);
+
+    // Convert the canvas to a Data URL (base64 string)
+    const texturePath = canvas.toDataURL(); // This is the base64 encoded string
+    if(objecttype=="top"){
+        console.log("xaviersobased");
+        toptexture=texturePath;
+    }
+    if(objecttype=="bottom"){
+        console.log("xaviercring");
+        bottomtexture=texturePath;
+    }
+    if(objecttype=="body"){
+        console.log("xanoy");
+        bodytexture=texturePath;
+    } 
+   
+
+    
 
     renderedobj.traverse((child) => {
         if (child.isMesh) {
@@ -728,6 +920,7 @@ function removeHighlightIfApplied(obj) {
             const uvAttribute = geometry.getAttribute('position').array;
             const uvs = [];
 
+            // Normalize UVs based on geometry's bounding box
             for (let i = 0; i < uvAttribute.length; i += 3) {
                 const x = (uvAttribute[i] - min.x) / size.x;
                 const y = (uvAttribute[i + 1] - min.y) / size.y;
@@ -736,20 +929,20 @@ function removeHighlightIfApplied(obj) {
 
             geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
 
-            // Use MeshPhongMaterial for lighting effects
+            // Use MeshPhongMaterial and apply the generated texture
             child.material = new THREE.MeshPhongMaterial({
-                color: color,
-                roughness: 1, // High roughness for a matte finish
-                metalness: 0, // Ensure no metallic effect
+                map: texture,  // Set the generated texture
+                roughness: 1,  // High roughness for a matte finish
+                metalness: 0,  // Ensure no metallic effect
                 flatShading: false,
             });
-            child.userData.originalMaterial = child.material;
 
-            child.userData.isHighlighted=false;
+            child.userData.originalMaterial = child.material;
+            child.userData.isHighlighted = false;
         }
     });
-}
 
+}
 
 
 
@@ -804,27 +997,46 @@ window.addEventListener('resize', () => {
 });
 
 
-function init2(combinepath){
+function init2(combinepath,t,b,bd){
     const loader = new THREE.OBJLoader();
-loader.load(combinepath, function (object) {
-    object.traverse(function (child) {
-        if (child instanceof THREE.Mesh) {
-            if (child.name === 'MyObject1') {
-                topModel=child;
-            } else if (child.name === 'MyObject2') {
-                // Apply texture to MyObject2
-                bottomModel=child;
+    console.log(combinepath);
+    loader.load(combinepath, function (object) {
+        object.traverse(function (child) {
+            if (child instanceof THREE.Mesh) {
+                if (child.name === 'MyObject1') {
+                    console.log(child);
+                    console.log(t);
+                    topModel=child;
+                    
+                } else if (child.name === 'MyObject2') {
+                    // Apply texture to MyObject2
+                    console.log(child);
+                    console.log(b);
+                    bottomModel=child;
+                   
+                    
+                }
+                else if (child.name === 'MyObject3') {
+                    console.log(child);
+                    console.log(bd);
+                    // Apply texture to MyObject2
+                    bodyModel=child;
+                    if(bd!==null){
+                        generateTexture(child,bd,1.0);}
+                }
+                
             }
-            else if (child.name === 'MyObject3') {
-                // Apply texture to MyObject2
-                bodyModel=child;
-            }
-            
-        }
     });
     summodel=object;
     render3DModelFromObj(summodel)
+    if(t!==null){
+        generateTexture(topModel,t,1.0);}
+    if(b!==null){
+            generateTexture(bottomModel,b,1.0);}
+    if(bd!==null){
+                generateTexture(bodyModel,bd,1.0);}
     //scene.add(object); // Add the loaded object to the scene
+    
 });
 }
 

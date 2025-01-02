@@ -14,6 +14,11 @@ let modelSchema = new mongoose.Schema({
       },
     },
   ],
+  textures: {
+    top: { type: String, default: null },     // Texture for top
+    bottom: { type: String, default: null },  // Texture for bottom
+    body: { type: String, default: null }     // Texture for body
+  },
 });
 
 let userSchema = new mongoose.Schema({

@@ -93,8 +93,8 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="at-btn at-btnlogin" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="button" class="at-btn at-btngradiant" id="verifyOtpButton">Verify OTP</button>
-                                        <button type="button" class="at-btn at-btngradiant" id="saveEmailButton" style="display: none;">Save New Email</button>
+                                        <button type="button" class="at-btn at-btngradiant at-btnsignup" id="verifyOtpButton">Verify</button>
+                                        <button type="button" class="at-btn at-btngradiant at-btnsignup" id="saveEmailButton" style="display: none;">Save</button>
                                     </div>
                                 </div>
                             </div>
@@ -134,23 +134,49 @@
                             <form id="passwordverifyForm">
                                 <div class="mb-3">
                                     <label for="otp" class="form-label">To set up a new password, please enter your current password first.</label>
-                                    <input type="text" class="form-control" name="pass" id="pass" placeholder="Enter Current Password" required>
-                                    
+                                    <div class="at-inputwithicon">
+                                    <input type="password" class="form-control" name="pass" id="pass" placeholder="Enter Current Password" required>
+                                    <i class="icon-eye-splash" id="togglePasswordVisible">
+                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.6854 9C11.6854 10.485 10.4854 11.685 9.00043 11.685C7.51543 11.685 6.31543 10.485 6.31543 9C6.31543 7.515 7.51543 6.315 9.00043 6.315C10.4854 6.315 11.6854 7.515 11.6854 9Z" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M8.99988 15.2025C11.6474 15.2025 14.1149 13.6425 15.8324 10.9425C16.5074 9.885 16.5074 8.1075 15.8324 7.05C14.1149 4.35 11.6474 2.79 8.99988 2.79C6.35238 2.79 3.88488 4.35 2.16738 7.05C1.49238 8.1075 1.49238 9.885 2.16738 10.9425C3.88488 13.6425 6.35238 15.2025 8.99988 15.2025Z" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </i>
+                                    <i class="icon-eye-hidden" id="togglePasswordHidden" style="display:none;">
+                                        <svg class="w-6 h-6 text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="#ccc" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.933 13.909A4.357 4.357 0 0 1 3 12c0-1 4-6 9-6m7.6 3.8A5.068 5.068 0 0 1 21 12c0 1-3 6-9 6-.314 0-.62-.014-.918-.04M5 19 19 5m-4 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                        </svg>
+                                    </i>
+                                    </div>
                                 </div>
+                                <a href="/forgot-password" target="_self">Forgot Password?</a>
                             </form>
-                            <a href="/forgot-password" target="_self">Forgot Password?</a>
+                            
                             <!-- New Email Entry Form (Initially Hidden) -->
                             <form id="passwordUpdateForm" style="display: none;">
                                 <div class="mb-3">
                                     <label for="newPassword" class="form-label">Enter New Password</label>
-                                    <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="New Password" required>
+                                    <div class="at-inputwithicon">
+                                        <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="New Password" required>
+                                        <i class="icon-eye-splash" id="toggPasswordVisible">
+                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M11.6854 9C11.6854 10.485 10.4854 11.685 9.00043 11.685C7.51543 11.685 6.31543 10.485 6.31543 9C6.31543 7.515 7.51543 6.315 9.00043 6.315C10.4854 6.315 11.6854 7.515 11.6854 9Z" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M8.99988 15.2025C11.6474 15.2025 14.1149 13.6425 15.8324 10.9425C16.5074 9.885 16.5074 8.1075 15.8324 7.05C14.1149 4.35 11.6474 2.79 8.99988 2.79C6.35238 2.79 3.88488 4.35 2.16738 7.05C1.49238 8.1075 1.49238 9.885 2.16738 10.9425C3.88488 13.6425 6.35238 15.2025 8.99988 15.2025Z" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </i>
+                                        <i class="icon-eye-hidden" id="toggPasswordHidden" style="display:none;">
+                                            <svg class="w-6 h-6 text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="#ccc" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.933 13.909A4.357 4.357 0 0 1 3 12c0-1 4-6 9-6m7.6 3.8A5.068 5.068 0 0 1 21 12c0 1-3 6-9 6-.314 0-.62-.014-.918-.04M5 19 19 5m-4 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                            </svg>
+                                        </i>
+                                    </div>
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="at-btn at-btnlogin" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="at-btn at-btngradiant" id="verifyPassButton">Continue</button>
-                            <button type="button" class="at-btn at-btngradiant" id="savePassButton" style="display: none;">Save</button>
+                            <button type="button" class="at-btn at-btngradiant at-btnsignup" id="verifyPassButton">Continue</button>
+                            <button type="button" class="at-btn at-btngradiant at-btnsignup" id="savePassButton" style="display: none;">Save</button>
                         </div>
                     </div>
                 </div>
@@ -191,5 +217,78 @@
 </div>
 </div>
 </div>
+<script>
+    document.getElementById("togglePasswordVisible").addEventListener("click", function() {
+        var passwordField = document.getElementById("pass");
+        var visibleIcon = document.getElementById("togglePasswordVisible");
+        var hiddenIcon = document.getElementById("togglePasswordHidden");
+        
+        if (passwordField.type === "password") {
+            passwordField.type = "text"; // Show the password
+            visibleIcon.style.display = "none"; // Hide the "visible" icon
+            hiddenIcon.style.display = "block"; // Show the "hidden" icon
+        } else {
+            passwordField.type = "password"; // Hide the password
+            visibleIcon.style.display = "block"; // Show the "visible" icon
+            hiddenIcon.style.display = "none"; // Hide the "hidden" icon
+        }
+    });
+
+    document.getElementById("togglePasswordHidden").addEventListener("click", function() {
+        var passwordField = document.getElementById("pass");
+        var visibleIcon = document.getElementById("togglePasswordVisible");
+        var hiddenIcon = document.getElementById("togglePasswordHidden");
+        
+        if (passwordField.type === "password") {
+            passwordField.type = "text"; // Show the password
+            visibleIcon.style.display = "none"; // Hide the "visible" icon
+            hiddenIcon.style.display = "block"; // Show the "hidden" icon
+        } else {
+            passwordField.type = "password"; // Hide the password
+            visibleIcon.style.display = "block"; // Show the "visible" icon
+            hiddenIcon.style.display = "none"; // Hide the "hidden" icon
+        }
+    });
+
+
+</script>
+
+<script>
+    document.getElementById("toggPasswordVisible").addEventListener("click", function() {
+        var passwordField2 = document.getElementById("newPassword");
+        var visibleIcon = document.getElementById("toggPasswordVisible");
+        var hiddenIcon = document.getElementById("toggPasswordHidden");
+        
+        if (passwordField2.type === "password") {
+            passwordField2.type = "text"; // Show the password
+            visibleIcon.style.display = "none"; // Hide the "visible" icon
+            hiddenIcon.style.display = "block"; // Show the "hidden" icon
+        } else {
+            passwordField2.type = "password"; // Hide the password
+            visibleIcon.style.display = "block"; // Show the "visible" icon
+            hiddenIcon.style.display = "none"; // Hide the "hidden" icon
+        }
+    });
+
+    document.getElementById("toggPasswordHidden").addEventListener("click", function() {
+        var passwordField2 = document.getElementById("newPassword");
+        var visibleIcon = document.getElementById("toggPasswordVisible");
+        var hiddenIcon = document.getElementById("toggPasswordHidden");
+        
+        if (passwordField2.type === "password") {
+            passwordField2.type = "text"; // Show the password
+            visibleIcon.style.display = "none"; // Hide the "visible" icon
+            hiddenIcon.style.display = "block"; // Show the "hidden" icon
+        } else {
+            passwordField2.type = "password"; // Hide the password
+            visibleIcon.style.display = "block"; // Show the "visible" icon
+            hiddenIcon.style.display = "none"; // Hide the "hidden" icon
+        }
+    });
+
+
+</script>
+
+
 </main>
 <%- include('./partials/footer') %>

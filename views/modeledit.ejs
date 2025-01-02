@@ -4,33 +4,33 @@
         
                 <div class="at-modeleditarea">
 
-                    <div class="left-panel">
+                    <div class="left-panel" id="lefti">
                         <div class="textures-area">
                             <h4>Textures</h4>
                             <div class="textures">
                             <div class="texture-selection">
-                                <img src="/Assets/images/texture1.jpeg" alt="Texture Preview" class="texture-img" onclick="" />
+                                <img src="/Assets/images/texture1.jpeg" alt="Texture Preview" class="texture-img" onclick="selectTexture('/Assets/images/texture1.jpeg')" />
                             </div>
                             <div class="texture-selection">
-                                <img src="/Assets/images/texture2.jpeg" alt="Texture Preview" class="texture-img" onclick="" />
+                                <img src="/Assets/images/texture2.jpeg" alt="Texture Preview" class="texture-img" onclick="selectTexture('/Assets/images/texture2.jpeg')" />
                             </div>
                             <div class="texture-selection">
-                                <img src="/Assets/images/texture4.jpeg" alt="Texture Preview" class="texture-img" onclick="" />
+                                <img src="/Assets/images/texture4.jpeg" alt="Texture Preview" class="texture-img" onclick="selectTexture('/Assets/images/texture4.jpeg')" />
                             </div>
                             <div class="texture-selection">
-                                <img src="/Assets/images/texture5.jpeg" alt="Texture Preview" class="texture-img" onclick="" />
+                                <img src="/Assets/images/texture5.jpeg" alt="Texture Preview" class="texture-img" onclick="selectTexture('/Assets/images/texture5.jpeg')" />
                             </div>
                             <div class="texture-selection">
-                                <img src="/Assets/images/texture7.jpg" alt="Texture Preview" class="texture-img" onclick="" />
+                                <img src="/Assets/images/texture7.jpg" alt="Texture Preview" class="texture-img" onclick="selectTexture('/Assets/images/texture7.jpg')" />
                             </div>
                             <div class="texture-selection">
-                                <img src="/Assets/images/texture8.jpg" alt="Texture Preview" class="texture-img" onclick="" />
+                                <img src="/Assets/images/texture8.jpg" alt="Texture Preview" class="texture-img" onclick="selectTexture('/Assets/images/texture8.jpg')" />
                             </div>
                             <div class="texture-selection">
-                                <img src="/Assets/images/texture9.jpeg" alt="Texture Preview" class="texture-img" onclick="" />
+                                <img src="/Assets/images/texture9.jpeg" alt="Texture Preview" class="texture-img" onclick="selectTexture('/Assets/images/texture9.jpeg')" />
                             </div>
                             <div class="texture-selection">
-                                <img src="/Assets/images/no-sign1.png" alt="Texture Preview" class="texture-img" onclick="" />
+                                <img src="/Assets/images/no-sign1.png" alt="Texture Preview" class="texture-img" onclick="selectTexture('/Assets/images/none.jpg') " />
                             </div>
                             </div>
 
@@ -39,16 +39,16 @@
                             <h4>SMPL-Textures</h4>
                             <div class="textures">
                                 <div class="texture-selection">
-                                    <img src="/Assets/images/1.png" alt="Texture Preview" class="texture-img" onclick="" />
+                                    <img src="/Assets/images/1.png" alt="Texture Preview" class="texture-img" onclick="selectTexture('/Assets/images/1.png')" />
                                 </div>
                                 <div class="texture-selection">
-                                    <img src="/Assets/images/3.png" alt="Texture Preview" class="texture-img" onclick="" />
+                                    <img src="/Assets/images/3.png" alt="Texture Preview" class="texture-img" onclick="selectTexture('/Assets/images/3.png')"  />
                                 </div>
                                 <div class="texture-selection">
-                                    <img src="/Assets/images/4.png" alt="Texture Preview" class="texture-img" onclick="" />
+                                    <img src="/Assets/images/4.png" alt="Texture Preview" class="texture-img" onclick="selectTexture('/Assets/images/4.png')"  />
                                 </div>
                                 <div class="texture-selection">
-                                    <img src="/Assets/images/no-sign1.png" alt="Texture Preview" class="texture-img" onclick="" />
+                                    <img src="/Assets/images/no-sign1.png" alt="Texture Preview" class="texture-img" onclick="selectTexture('/Assets/images/none.jpg') "  />
                                 </div>
                                 </div>
 
@@ -82,8 +82,9 @@
                             </div>
                             
                         </div>
+                        
                     </div>
-
+                    
 
                     <div class="right-panel">
                         
@@ -100,8 +101,41 @@
                                 </div>
                                 
                             </div>
+                            <!--<button class="at-btn at-btnsave" id="savebtn" onclick="savechanges()">save</button>-->
+                            <div class="dropdown-containerrr">
+                                <button type="button" class="at-btn at-btnsavee dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleMenu2()"> Save  <!--<span class="dropdown-arrow">&#129171;</span> --></button>
+                
+                                  
+                                <div id="formatSelectt" class="dropdown-menu dropdown-menu-right">
+                            
+                                    <button class="dropdown-item" type="button" id="savebtn" onclick="savechanges()">Save Changes</button>
+                                    <button class="dropdown-item" type="button" id="saveAsButton" onclick="openSaveAsModal()">Save as <br> New Model</button>
+                                </div>
+                            </div>
+                            <!-- Modal for Save As -->
+                            <div id="saveAsModal" class="modal" tabindex="-1" role="dialog" style="display: none;">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Save As New Model</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeSaveAsModal()">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <label for="newModelName">Enter a name for the new model:</label>
+                                            <input type="text" id="newModelName" class="form-control" placeholder="New Model Name">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="at-btn at-btnlogin" onclick="closeSaveAsModal()">Cancel</button>
+                                            <button type="button" class="at-btn at-btngradiant at-btnsignup" onclick="saveAsModel()">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="dropdown-containerr">
-                                <button type="button" class="at-btn at-btndownload dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleMenu()">Download <!--<span class="dropdown-arrow">&#129171;</span> --></button>
+                                <button type="button" class="at-btn at-btndownload dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleMenu()"> Download  <!--<span class="dropdown-arrow">&#129171;</span> --></button>
                 
                                   
                                 <div id="formatSelect" class="dropdown-menu dropdown-menu-right">
@@ -163,10 +197,21 @@
 </main>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-      init2('<%= mergedModelPath %>');
+        const scrollTo = "<%= scrollTo %>"; // Value from server
+        if (scrollTo) {
+            const targetElement = document.getElementById(scrollTo); // Use getElementById or querySelector
+            if (targetElement) {
+            targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+        const tt = "<%= topTexture %>";
+        const bt= "<%= bottomTexture %>";
+        const bdt = "<%= bodyTexture %>";
+      init2('<%= mergedModelPath %>',tt,bt,bdt);
       
    });
 </script>
+  
 
 <script>
     function switchModelPart(part) {
@@ -174,15 +219,16 @@
        const lowerModelPath ='hsajc'; // Get the lower model path
        const bodyModelPath ='shvfja'; 
        if (part === 'upper') {
+            
            console.log("Switching to upper model:", upperModelPath);
-           initializeFileInput(topModel); // Initialize with upper model path
+           initializeFileInput(topModel, "top"); // Initialize with upper model path
        } else if (part === 'lower') {
            console.log("Switching to bottom model:", lowerModelPath);
-           initializeFileInput(bottomModel); // Initialize with lower model path
+           initializeFileInput(bottomModel,"bottom"); // Initialize with lower model path
        }
        else if (part === 'body') {
            console.log("Switching to smpl body model:", bodyModelPath);
-           initializeFileInput(bodyModel); // Initialize with lower model path
+           initializeFileInput(bodyModel,"body"); // Initialize with lower model path
        }
    }
 </script>

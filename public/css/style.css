@@ -575,6 +575,23 @@ address { font-style: italic; }
 	justify-content: center;
 	color: var(--themeConifer);
 }
+
+.at-btnlogin2{
+	display: flex;
+	font-size: 13px;
+	min-width: 220px;
+	line-height: 30px;
+	align-items: center;
+	border-radius: 10px;
+	justify-content: center;
+	color: var(--themeConifer);
+}
+.linehr{
+	border: 1px solid #555; 
+	width: 100px;
+	
+	
+}
 .at-btnEdit{
 	display: flex;
 	font-size: 16px;
@@ -1814,17 +1831,32 @@ hr{
 }
 
 /* Dropdown menu styling */
-.dropdown-menu {
+#formatSelect.dropdown-menu {
     display: none; /* Hidden by default */
     position: absolute;
     color: var(--themeConifer);
 	background: rgba(197, 249, 85, 10%);
-    min-width: 140px;
+	width:140px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     padding: 10px 0;
     z-index: 1;
 }
+
+#formatSelectt.dropdown-menu{
+	display: none; /* Hidden by default */
+    position: absolute;
+    color: var(--themeConifer);
+	background: rgba(197, 249, 85, 10%);
+	min-width:120px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 10px 0;
+    z-index: 1;
+
+}
+
+
 
 /* Individual dropdown items */
 .dropdown-item {
@@ -2142,6 +2174,11 @@ hr{
 	top: 15px;
 	right: 80px;
   }
+  .dropdown-containerrr{
+	position: absolute;
+	top: 15px;
+	right: 230px;
+  }
 
   .at-btndownload{
 	position: relative;
@@ -2156,10 +2193,34 @@ hr{
 	justify-content:space-evenly;
 	color: var(--themeConifer);
 }
+.at-btnsavee{
+	position: relative;
+	display: flex;
+	padding-left: 10px;
+	font-size: 16px;
+	min-width: 100px;
+	line-height: 35px;
+	align-content: center ;
+	align-items: center;
+	border-radius: 10px;
+	justify-content:space-evenly;
+	color: var(--themeConifer);
+}
 
-.dropdown-toggle{
+.at-btndownload.dropdown-toggle{
 	height: 40px !important;
-	width: 130px !important;
+	width: 140px !important;
+	color: var(--themeConifer) !important;
+	background: rgba(197, 249, 85, 10%) !important;
+}
+.noteimp{
+	padding-top: 20px;
+	
+}
+
+.at-btnsavee.dropdown-toggle{
+	height: 40px !important;
+	width: 120px !important;
 	color: var(--themeConifer) !important;
 	background: rgba(197, 249, 85, 10%) !important;
 }
@@ -2425,3 +2486,78 @@ hr{
 	  font-weight: bold;
   }
 
+
+  .modal.fade.show {
+	background-color: rgba(0, 0, 0, 0.5) !important; /* Adjust opacity as needed */
+}
+
+.at-logsign{
+	height: auto;
+	padding: 5px;
+	align-content: center;
+	align-items: center;
+}
+
+.at-splashscreen2 {
+	top: 0;
+	right: 0;
+	margin: 0;
+	width: 50%;
+	height: 100%;
+	max-width: 150px;
+	position: relative;
+	overflow: hidden;
+}
+.at-splashscreen2 img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: fill;
+
+}
+
+.at-flexcon{
+	width: 60%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+	gap: 30px;
+
+}
+.at-loginsignarea{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
+.at-loginsignarea p{
+	text-align: center;
+}
+.insidecont{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	
+}
+
+.icon-eye-splash, .icon-eye-hidden {
+    cursor: pointer; /* Makes the icons clickable */
+}
+
+
+.form-check-input:checked{
+	background-color: #C5F955 !important;
+	border-color: #C5F955 !important;
+	box-shadow: none !important;
+}
+
+.at-btnsave{
+	min-width: 121px;
+	line-height: 36px;
+	position: absolute;
+	top: 16px;
+	right: 230px;
+	border-radius: 10px;
+}

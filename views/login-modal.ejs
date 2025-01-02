@@ -1,0 +1,26 @@
+<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="authModalLabel">Authentication Required</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>You need to log in or sign up to access the "Try Now" page.</p>
+                <div class="d-flex justify-content-around">
+                    <a href="/login" class="btn btn-primary">Log In</a>
+                    <a href="/signup" class="btn btn-secondary">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Trigger modal on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        const authModal = new bootstrap.Modal(document.getElementById('authModal'));
+        authModal.show();
+    });
+</script>

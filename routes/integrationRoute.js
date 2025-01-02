@@ -86,8 +86,13 @@ router.post('/upload', upload.single('file'), async (req, res) => {
             modelPath= filePaths.find(fp => fp.type === 'combined').path;
             foundUser.models.push({
                 title: title, // Model title from the form
-                filePaths: filePaths // Save all file paths
-            });
+                filePaths: filePaths, // Array of model file paths
+                textures: {
+                    top: null,
+                    bottom: null,
+                    body: null
+                  }
+            });
             await foundUser.save(); // Save the updated user document
         }
         req.session.user = foundUser.toObject();

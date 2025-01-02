@@ -23,7 +23,8 @@
                                         <!-- 3D Model Renderer -->
                                         <div id="modelView-<%= model._id %>" class="model-view" style="width: 50vh; height: 50vh; background-color: black; border-radius:10px; overflow: hidden;" ></div>
                                         <script>
-                                            render3DModel('<%= filePath.path %>','modelView-<%= model._id %>');
+                                            init('<%= filePath.path %>','<%= model.textures.top %>','<%= model.textures.bottom %>','<%= model.textures.body %>','modelView-<%= model._id %>')
+                                            //render3DModel('<%= filePath.path %>','modelView-<%= model._id %>');
                                         </script>
                                     <% } %>
                                 <% }) %>

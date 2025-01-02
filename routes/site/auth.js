@@ -121,7 +121,7 @@ router.post('/update-password', async (req, res) => {
             req.session.user = foundUser.toObject();
              
 
-            console.log('Emai updated successfully:', foundUser.password);
+            console.log('Password updated successfully:');
             req.session.flash = { type: "success", message: "Password Updated Successfully." };
   
             res.render('settings'); 

@@ -6,7 +6,11 @@ const mergeObjFiles = require('../utils/combinemodels');
 const fs = require('fs');
 const path = require('path');
 
+//const { loadtextures } = require('../public/js/functions.js');
+
+
 router.get('/modeledit/:modelId', async (req, res) => {
+    
     try {
         const userId = req.session.user;
         const user = await User.findById(userId).exec();
@@ -36,6 +40,14 @@ router.get('/modeledit/:modelId', async (req, res) => {
         const fullBottomPath = path.join(__dirname, '../public', bottomPath);
         const fullSmplPath = path.join(__dirname, '../public', smplPath);
         const fullMergePath = path.join(__dirname, '../public', mergePath);
+
+         // Extract textures from the model schema
+        let topTexturePath = modelToEdit.textures.top;     // Texture for top
+        let bottomTexturePath = modelToEdit.textures.bottom;  // Texture for bottom
+        let bodyTexturePath = modelToEdit.textures.body;      // Texture for body
+ 
+         // Call the function from functions.js with the texture paths
+         //loadtextures(topTexturePath, bottomTexturePath, bodyTexturePath);
 
        
         // Read the merged model file to count vertices and faces
@@ -69,8 +81,12 @@ router.get('/modeledit/:modelId', async (req, res) => {
                 lowerModelPath: bottomPath || '',
                 smplModelPath: smplPath || '',
                 mergedModelPath: mergePath,
-                modelId: modelToEdit._id  // Pass the model ID to the edit form
-            });
+                modelId: modelToEdit._id, // Pass the model ID to the edit form
+                topTexture: topTexturePath || '',   // Pass the top texture path
+                bottomTexture: bottomTexturePath || '', // Pass the bottom texture path
+                bodyTexture: bodyTexturePath || '' 
+            }
+        );
         });
 
     } catch (err) {
@@ -82,8 +98,9 @@ router.get('/modeledit/:modelId', async (req, res) => {
 
 
 
-/*
+
 router.get('/modeledit/:modelId', async (req, res) => {
+   // console.log("sdfghjkDFCGVBHN");
     try {
         const userId = req.session.user;
         const user = await User.findById(userId).exec();
@@ -99,13 +116,13 @@ router.get('/modeledit/:modelId', async (req, res) => {
         if (!modelToEdit) {
             return res.status(404).send('Model not found.');
         }
-
+        console.log();
         // Find the file paths for 'upper', 'bottom', and 'SMPL' types from the selected model
         let latestUpperModelPath = modelToEdit.filePaths.find(file => file.type === 'upper')?.path;
         let latestBottomModelPath = modelToEdit.filePaths.find(file => file.type === 'bottom')?.path;
         let latestSMPLModelPath = modelToEdit.filePaths.find(file => file.type === 'smpl')?.path;
 
-        
+       
 
         
 
@@ -138,7 +155,87 @@ router.get('/modeledit/:modelId', async (req, res) => {
         res.status(500).send('Server error');
     }
 });
-*/
+
+router.post('/modeledit/:modelId/save-textures', async (req, res) => {
+    try {
+        const userId = req.session.user;
+        const modelId = req.params.modelId;
+        const { top, bottom, body } = req.body;
+
+        const user = await User.findById(userId).exec();
+        if (!user) {
+            return res.status(404).send('User not found.');
+        }
+
+        const modelToEdit = user.models.find(model => model._id.toString() === modelId);
+        if (!modelToEdit) {
+            return res.status(404).send('Model not found.');
+        }
+
+        // Update the textures in the schema
+        modelToEdit.textures.top = top || modelToEdit.textures.top;
+        modelToEdit.textures.bottom = bottom || modelToEdit.textures.bottom;
+        modelToEdit.textures.body = body || modelToEdit.textures.body;
+
+        // Save changes
+        await user.save();
+        
+        res.status(200).json({ message: 'Textures updated successfully.' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+});
+
+
+router.post('/modeledit/:modelId/save-as', async (req, res) => {
+    try {
+        const userId = req.session.user; // Get the logged-in user's ID from the session
+        const modelId = req.params.modelId; // The ID of the model to duplicate
+        const { top, bottom, body, newTitle } = req.body; // New textures and optional new title
+
+        // Find the user
+        const user = await User.findById(userId).exec();
+        if (!user) {
+            return res.status(404).send('User not found.');
+        }
+
+        // Find the model to duplicate
+        const modelToDuplicate = user.models.id(modelId);
+        if (!modelToDuplicate) {
+            return res.status(404).send('Model not found.');
+        }
+
+        // Create a duplicate model with updated textures and optional new title
+        const duplicatedModel = {
+            title: newTitle || `${modelToDuplicate.title}_copy`, // Use new title or append "_copy"
+            date: Date.now(), // New creation date
+            filePaths: [...modelToDuplicate.filePaths], // Copy file paths
+            textures: {
+                top: top || modelToDuplicate.textures.top,
+                bottom: bottom || modelToDuplicate.textures.bottom,
+                body: body || modelToDuplicate.textures.body,
+            },
+        };
+
+        // Add the duplicate model to the user's models array
+        user.models.push(duplicatedModel);
+
+        // Save the updated user document
+        await user.save();
+
+        res.status(201).json({
+            message: 'Model duplicated successfully.',
+            duplicatedModel,
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+});
+
+
+
 
 // Route to fetch the latest 'upper' model for a user
 /*router.get('/modeledit', async (req, res) => {
